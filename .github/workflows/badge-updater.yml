@@ -1,0 +1,56 @@
+# Extracted from: https://github.com/bahmutov/dependency-version-badge/blob/master/.github/workflows/demo.yml
+name: BadgeUpdater
+on:
+  push:
+    # update README badge only if the README file changes
+    # or if the package.json file changes, or this file changes
+    branches:
+      - master
+    paths:
+      - README.md
+      - package.json
+      - .github/workflows/badge-updater.yml
+  schedule:
+    # update badges every night
+    # because we have a few badges that are linked
+    # to the external repositories
+    - cron: '0 3 * * *'
+
+jobs:
+  build:
+    name: Badges
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v1
+
+      - name: Install NPM dependencies 📦
+        uses: benji377/npm-install@v1
+
+      - name: Update version badges 🏷
+        run: npm run demo
+
+      # update the version of dependency-version-badge dependency
+      # currently used by bahmutov/cy-rollup and bahmutov/cypress-svelte-unit-test
+      - name: Update version badges from example repos 💎
+        run: |
+          DEBUG=dependency-version-badge ./bin/update-badge.js \
+            dependency-version-badge --from https://github.com/bahmutov/cy-rollup
+          DEBUG=dependency-version-badge ./bin/update-badge.js \
+            dependency-version-badge --from bahmutov/cypress-svelte-unit-test
+      # update color coded badges that show how far is the current version
+      # behind the latest published version of the dependency
+      - name: Update badges using --behind 🏷
+        run: npm run demo:behind
+
+      # update version used in multiple github repos in a single command
+      # that uses multiple "--from" parameters
+      - name: Update multiple --from repos 🏷
+        run: npm run demo:from
+
+      # commit any changed files
+      # https://github.com/mikeal/publish-to-github-action
+      - name: Push any changes to repo 📤
+        uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
