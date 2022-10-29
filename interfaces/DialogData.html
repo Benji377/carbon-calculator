@@ -192,6 +192,12 @@ import { DiagramData, MenuService } from &#x27;../shared&#x27;;
   templateUrl: &#x27;./calculation-diagram.component.html&#x27;,
   styleUrls: [&#x27;./calculation-diagram.component.scss&#x27;]
 })
+
+/**
+ * This class is the base class for each diagramm. It is actually the base site, where then every diagramm
+ * is located on. To view this site you first need to select an entry and then in the top right corner
+ * you will find the option &quot;Diagrams&quot; where you can look at this.
+ */
 export class CalculationDiagramComponent implements OnInit {
 
 	private calculation: Calculation | undefined;
@@ -207,35 +213,57 @@ export class CalculationDiagramComponent implements OnInit {
 	) {
 	}
 
+	/**
+	 * Defines what happens when this page is opened, or more precisely when this component is started/initialized
+	 * @returns void
+	 */
 	ngOnInit() {
 		this.activatedRoute.params.subscribe(params &#x3D;&gt; {
 			const id &#x3D; params[&#x27;id&#x27;] as unknown;
+			// Changes the menu entry when someone clicks on &quot;compare&quot; in the menu
 			this.translateService.get(&quot;compare&quot;).subscribe(translation &#x3D;&gt; {
 				this.menuService.changeMenu([{icon:&quot;bar_chart&quot;, menuPointName: translation, link: &#x60;/emission/${id}/diagram/compare&#x60;}]);
 			});
+			// Issue forecasting
 			if (typeof id !&#x3D;&#x3D; &quot;string&quot;) throw new Error(&quot;Id not of type string (this should not occur)&quot;);
+			// Gets all calculations associated with the entry and loads its diagrams
 			this.calculation &#x3D; this.calculationService.getById(id);
 			this.loadChart();
 		});
 	}
 
+	/**
+	 * Loads the charts using the calculated value. The value gets then passed on to each individual chart.
+	 * This function can also break earlier, if exceptions occur
+	 * @returns void
+	 */
 	loadChart() {
+		// Checks if a calculation for this entry exists, else breaks the loading
 		if(this.calculation &#x3D;&#x3D; null) {
 			this.data &#x3D; [];
 			return;
 		}
+		// Basically sums together all the co2 expenses recorded in the entry
 		this.translateService.getTranslation(this.translationManager.lang).subscribe(translations &#x3D;&gt; {
-			//TODO: case for 0 len
+			// TODO: case for 0 len: If the expense is null, it is still displayed, but it should actually not
 			if(this.calculation &#x3D;&#x3D; null) return;
 			const factorManager &#x3D; this.calculation.factorManager;
 			this.data &#x3D; this.calculation.modules.map((mod) &#x3D;&gt; ({ name: this.translationManager.getTranslation(translations, &quot;modules.&quot; + mod.id), value: Math.floor(mod.calculate(factorManager) * 100) / 100 }));
 		});
 	}
-
+	/**
+	 * Opens the diagramm when clicking on it to display it in bigger size
+	 * @param {DialogDataType} type Defines which diagram to open
+	 */
 	openDialog(type: DialogDataType) {
 		this.dialog.open(DiagramDialogComponent, { width: &quot;95%&quot;, data: { type, data: this.data } });
 	}
 
+	/**
+	 * Unknown
+	 * 
+	 * Maybe a secret function? It is unclear what this should be
+	 */
 	openKonami() {
 		this.dialog.open(KonamiDialogComponent, { width: &quot;95%&quot; });
 	}
@@ -258,6 +286,11 @@ interface DialogData{
 	&#x60;,
 	styleUrls: []
   })
+
+/**
+ * Defines the class which holds the bigger window for when you click on a diagram
+ * It should just show a modal with diagram in a bigger size
+ */
 export class DiagramDialogComponent{
 	constructor(
 		public dialogRef: MatDialogRef&lt;DiagramDialogComponent&gt;,
@@ -271,6 +304,12 @@ export class DiagramDialogComponent{
 	styles: [&quot;img { width: 100%; height: auto; }&quot;],
 	styleUrls: []
   })
+
+/**
+ * Unknown
+ * 
+ *  Maybe a secret class? It is unclear what this should be
+ */
 export class KonamiDialogComponent{
 	constructor(){}
 }

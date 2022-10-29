@@ -205,7 +205,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/calculation-diagram/pie-diagram/pie-diagram.component.ts:60</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/calculation-diagram/pie-diagram/pie-diagram.component.ts:73</a></div>
                             </td>
                         </tr>
 
@@ -231,9 +231,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/calculation-diagram/pie-diagram/pie-diagram.component.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/calculation-diagram/pie-diagram/pie-diagram.component.ts:22</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Imports data for the diagram from somewhere</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -265,8 +271,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="64"
-                            class="link-to-prism">src/app/calculation-diagram/pie-diagram/pie-diagram.component.ts:64</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="77"
+                            class="link-to-prism">src/app/calculation-diagram/pie-diagram/pie-diagram.component.ts:77</a></div>
                 </td>
             </tr>
 
@@ -316,7 +322,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/calculation-diagram/pie-diagram/pie-diagram.component.ts:56</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/calculation-diagram/pie-diagram/pie-diagram.component.ts:69</a></div>
                         </td>
                     </tr>
 
@@ -380,10 +386,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/calculation-diagram/pie-diagram/pie-diagram.component.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/calculation-diagram/pie-diagram/pie-diagram.component.ts:34</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Same as the bar-diagramm, this showcases styling options for the diagramm,
+this could also be set in an external styling file, like CSS</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -410,11 +423,13 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/calculation-diagram/pie-diagram/pie-diagram.component.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/calculation-diagram/pie-diagram/pie-diagram.component.ts:22</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Imports data for the diagram from somewhere</p>
+</div>
 
                                 <div class="io-description">
                                         <b>Parameters :</b>
@@ -424,6 +439,7 @@
                                                     <td>Name</td>
                                                         <td>Type</td>
                                                     <td>Optional</td>
+                                                        <td>Description</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -438,6 +454,10 @@
                                                                 No
                                                         </td>
                                                         
+                                                            <td>
+                                                                    <p>The data to import</p>
+
+                                                            </td>
                                                     </tr>
                                             </tbody>
                                         </table>
@@ -466,8 +486,17 @@ import type { DiagramData } from &#x27;../../shared&#x27;;
   templateUrl: &#x27;./pie-diagram.component.html&#x27;,
   styleUrls: [&#x27;./pie-diagram.component.scss&#x27;]
 })
+
+/**
+ * Defines the Pie diagramm. This diagram showcases the amount of CO2 each entry produces, but in a pie
+ * form. It is especially useful to showcase which entry produces more or less CO2 compared to all others.
+ */
 export class PieDiagramComponent implements OnInit {
 
+	/**
+	 * Imports data for the diagram from somewhere
+	 * @param {DiagramData} diagramData The data to import
+	 */
 	@Input()
 	public set data(diagramData: DiagramData[]) {
 		this.merge &#x3D; {
@@ -477,6 +506,10 @@ export class PieDiagramComponent implements OnInit {
 		};
 	}
 
+	/**
+	 * Same as the bar-diagramm, this showcases styling options for the diagramm,
+	 * this could also be set in an external styling file, like CSS
+	 */
 	options: EChartsOption &#x3D; {
 	  tooltip: {
 		trigger: &#x27;item&#x27;

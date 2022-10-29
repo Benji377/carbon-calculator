@@ -207,7 +207,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/calculation-diagram/tree-diagram/tree-diagram.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/calculation-diagram/tree-diagram/tree-diagram.component.ts:51</a></div>
                             </td>
                         </tr>
 
@@ -233,9 +233,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/calculation-diagram/tree-diagram/tree-diagram.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/calculation-diagram/tree-diagram/tree-diagram.component.ts:31</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Sets the data of the diagramm, this is then used to calculate the amount of trees needed</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -267,8 +273,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="40"
-                            class="link-to-prism">src/app/calculation-diagram/tree-diagram/tree-diagram.component.ts:40</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">src/app/calculation-diagram/tree-diagram/tree-diagram.component.ts:55</a></div>
                 </td>
             </tr>
 
@@ -315,7 +321,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/calculation-diagram/tree-diagram/tree-diagram.component.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/calculation-diagram/tree-diagram/tree-diagram.component.ts:24</a></div>
                         </td>
                     </tr>
 
@@ -347,7 +353,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/calculation-diagram/tree-diagram/tree-diagram.component.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/calculation-diagram/tree-diagram/tree-diagram.component.ts:23</a></div>
                         </td>
                     </tr>
 
@@ -377,11 +383,13 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/calculation-diagram/tree-diagram/tree-diagram.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/calculation-diagram/tree-diagram/tree-diagram.component.ts:31</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Sets the data of the diagramm, this is then used to calculate the amount of trees needed</p>
+</div>
 
                                 <div class="io-description">
                                         <b>Parameters :</b>
@@ -391,6 +399,7 @@
                                                     <td>Name</td>
                                                         <td>Type</td>
                                                     <td>Optional</td>
+                                                        <td>Description</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -405,6 +414,10 @@
                                                                 No
                                                         </td>
                                                         
+                                                            <td>
+                                                                    <p>Data to import into the diagram</p>
+
+                                                            </td>
                                                     </tr>
                                             </tbody>
                                         </table>
@@ -427,6 +440,9 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input } from &#x27;@angular/core&#x27;;
 import type { DiagramData } from &#x27;../../shared&#x27;;
 
+/**
+ * Defines a simple &quot;tree&quot; which will then be duplicated in the diagramm
+ */
 interface Tree {
 	position: { x: number, y: number },
 	size: number
@@ -437,21 +453,33 @@ interface Tree {
   templateUrl: &#x27;./tree-diagram.component.html&#x27;,
   styleUrls: [&#x27;./tree-diagram.component.scss&#x27;]
 })
+
+/**
+ * This diagramm showcses how many trees one should plant to equivalent the amount of CO2 produced
+ * The amount is then showcased graphically with trees and a big black number over it
+ */
 export class TreeDiagramComponent implements OnInit {
 	public trees: Tree[] &#x3D; [];
 	public requiredTrees: number &#x3D; 0;
 
+	/**
+	 * Sets the data of the diagramm, this is then used to calculate the amount of trees needed
+	 * @param {DiagramData} diagramData Data to import into the diagram
+	 */
 	@Input()
 	public set data(diagramData: DiagramData[]) {
+		// Gets the amount of CO2 produced
 		const co2sum &#x3D; diagramData.reduce((sum, current) &#x3D;&gt; sum + current.value, 0);
+		// Calculates the amount of required trees
 		this.requiredTrees &#x3D; Math.ceil(co2sum / 31.5);
-		//this.requiredTrees &#x3D; 10000;
 		const requiredTrees &#x3D; Math.min(Math.max(this.requiredTrees / 100, 0), 500);
 		
+		// Adds the trees to the diagramm
 		this.trees &#x3D; [];
 		for(let i &#x3D; 0; i &lt; requiredTrees; i++) {
 			const size &#x3D; Math.min(Math.max(19 / Math.log10(requiredTrees) + (Math.random() * 3 - 1.5), 3), 8);
 			this.trees.push({
+				// Sets the position of each tree individually
 				position: {
 					x: Math.round(Math.random() * 90 + 5),
 					y: Math.min(Math.max(Math.round(Math.random() * 85), 30), 100 )

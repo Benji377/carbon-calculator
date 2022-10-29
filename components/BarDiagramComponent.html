@@ -205,7 +205,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/calculation-diagram/bar-diagram/bar-diagram.component.ts:72</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/calculation-diagram/bar-diagram/bar-diagram.component.ts:83</a></div>
                             </td>
                         </tr>
 
@@ -273,9 +273,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/calculation-diagram/bar-diagram/bar-diagram.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/calculation-diagram/bar-diagram/bar-diagram.component.ts:24</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>A function to import data from somewhere and display it on the diagram</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -307,17 +313,25 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="79"
-                            class="link-to-prism">src/app/calculation-diagram/bar-diagram/bar-diagram.component.ts:79</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="94"
+                            class="link-to-prism">src/app/calculation-diagram/bar-diagram/bar-diagram.component.ts:94</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>DEfines what happens on creation of this component, in this case nothing happens</p>
+</div>
 
+                    <div>
+                    </div>
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>void</p>
 
                     </div>
                 </td>
@@ -361,7 +375,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/calculation-diagram/bar-diagram/bar-diagram.component.ts:65</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/calculation-diagram/bar-diagram/bar-diagram.component.ts:76</a></div>
                         </td>
                     </tr>
 
@@ -388,7 +402,8 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>{
-		//TODO: read from stylesheet?
+		// One could also save this in an external stylesheet
+		// TODO: Test reading the values below from a stylesheet
 		color: [&#x27;#3398DB&#x27;],
 		tooltip: {
 			trigger: &#x27;axis&#x27;,
@@ -423,7 +438,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/calculation-diagram/bar-diagram/bar-diagram.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/calculation-diagram/bar-diagram/bar-diagram.component.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -453,11 +468,13 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/calculation-diagram/bar-diagram/bar-diagram.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/calculation-diagram/bar-diagram/bar-diagram.component.ts:24</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>A function to import data from somewhere and display it on the diagram</p>
+</div>
 
                                 <div class="io-description">
                                         <b>Parameters :</b>
@@ -467,6 +484,7 @@
                                                     <td>Name</td>
                                                         <td>Type</td>
                                                     <td>Optional</td>
+                                                        <td>Description</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -481,6 +499,10 @@
                                                                 No
                                                         </td>
                                                         
+                                                            <td>
+                                                                    <p>Data to be set on the diagramm</p>
+
+                                                            </td>
                                                     </tr>
                                             </tbody>
                                         </table>
@@ -511,8 +533,17 @@ import type { DiagramData } from &#x27;../../shared&#x27;;
   templateUrl: &#x27;./bar-diagram.component.html&#x27;,
   styleUrls: [&#x27;./bar-diagram.component.scss&#x27;]
 })
+
+/**
+ * Defines the bar-diagramm and its purpose is to showcase how much CO2 each module creates.
+ * It especially also shows the value on the y-axis and each bar has a specific place on the x-axis
+ */
 export class BarDiagramComponent implements OnInit {
 
+	/**
+	 * A function to import data from somewhere and display it on the diagram
+	 * @param {DiagramData} diagramData Data to be set on the diagramm
+	 */
 	@Input()
 	public set data(diagramData: DiagramData[]) {
 		let name &#x3D; [];
@@ -531,8 +562,10 @@ export class BarDiagramComponent implements OnInit {
 		};
 	}
 
+	// This defines important styling options for the diagramm, something like CSS for webpages
 	options: EChartsOption &#x3D; {
-		//TODO: read from stylesheet?
+		// One could also save this in an external stylesheet
+		// TODO: Test reading the values below from a stylesheet
 		color: [&#x27;#3398DB&#x27;],
 		tooltip: {
 			trigger: &#x27;axis&#x27;,
@@ -578,6 +611,10 @@ export class BarDiagramComponent implements OnInit {
 		private translationManager: TranslationManagerService,
 	) { }
 
+	/**
+	 * DEfines what happens on creation of this component, in this case nothing happens
+	 * @returns void
+	 */
 	ngOnInit(): void {
 	}
 }
