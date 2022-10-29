@@ -84,9 +84,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                                 <a href="components/BarDiagramComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >BarDiagramComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/CalculationCardComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >CalculationCardComponent</a>
-                                            </li>
-                                            <li class="link">
                                                 <a href="components/CalculationDiagramCompareComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >CalculationDiagramCompareComponent</a>
                                             </li>
                                             <li class="link">
