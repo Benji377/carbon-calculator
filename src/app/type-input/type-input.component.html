@@ -1,7 +1,7 @@
 <div class="typeModule">
   <p class="hint">{{"hints."+module.id+"."+type.id|translate}}</p>
     <mat-card>
-        <input matInput type="number" (keyup)="save()" [(ngModel)]="type.number">
+        <input matInput type="number" min="0" (keyup)="save()" [(ngModel)]="type.number">
         <p>{{ module == undefined ? "" : module.unit | translate }}/{{"year"|translate}}</p>
 
     </mat-card>
