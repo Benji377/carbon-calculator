@@ -151,27 +151,114 @@ $mat-dark-theme-background: (
 // Full Angular Material theming via the new v21 theming API
 // See https://material.angular.io/guide/theming for details.
 
-$color-config: (
-  primary: map.merge(mat.$green-palette, (
-    secondary: mat.$chartreuse-palette,
-    error: mat.$red-palette,
-  )),
-);
+// Theme Config - CSS Custom Properties (for backward compatibility)
+body {
+  --primary-color: #59981a;
+  --primary-lighter-color: #cde0ba;
+  --primary-darker-color: #3e7b0f;
+  --text-primary-color: #{$light-primary-text};
+  --text-primary-lighter-color: #{$dark-primary-text};
+  --text-primary-darker-color: #{$light-primary-text};
+  
+  --accent-color: #81b622;
+  --accent-lighter-color: #d9e9bd;
+  --accent-darker-color: #649e14;
+  --text-accent-color: #{$dark-primary-text};
+  --text-accent-lighter-color: #{$dark-primary-text};
+  --text-accent-darker-color: #{$light-primary-text};
+  
+  --warn-color: #ed5d4c;
+  --warn-lighter-color: #facec9;
+  --warn-darker-color: #e54133;
+  --text-warn-color: #{$dark-primary-text};
+  --text-warn-lighter-color: #{$dark-primary-text};
+  --text-warn-darker-color: #{$light-primary-text};
+}
 
+// Material v21+ theme with brand colors
 $theme: mat.define-theme((
-  color: $color-config,
+  color: (
+    primary: mat.$green-palette,
+    tertiary: mat.$chartreuse-palette,
+  )
 ));
 
 @include mat.all-component-bases($theme);
 @include mat.all-component-themes($theme);
 
 .theme-alternate {
+  $dark-color-config: (
+    primary: mat.$green-palette,
+    tertiary: mat.$chartreuse-palette,
+  );
+  
   $dark-theme: mat.define-theme((
-    color: map.merge($color-config, (theme-type: dark)),
+    color: map.merge($dark-color-config, (theme-type: dark)),
   ));
 
   @include mat.all-component-bases($dark-theme);
   @include mat.all-component-themes($dark-theme);
+}
+
+// Explicit toolbar styling for Material Design 3
+mat-toolbar[color="primary"] {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+mat-toolbar[color="accent"] {
+  background-color: var(--accent-color) !important;
+  color: white !important;
+}
+
+mat-toolbar[color="warn"] {
+  background-color: var(--warn-color) !important;
+  color: white !important;
+}
+
+// Global content padding for router outlet pages
+router-outlet {
+  + * {
+    padding: 0 20px;
+  }
+}
+
+// Content container padding styles
+.content {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+// Responsive container padding for smaller screens
+@media screen and (max-width: 600px) {
+  .content {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  
+  router-outlet {
+    + * {
+      padding: 0 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .content {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+  
+  router-outlet {
+    + * {
+      padding: 0 5px;
+    }
+  }
+}
+
+// Ensure mat-card has proper padding
+mat-card {
+  padding: 16px;
 }
 
 // Helpers (replaces @angular/flex-layout usage)
@@ -211,7 +298,32 @@ $theme: mat.define-theme((
   padding: 0 1.15em;
   margin: 0 .65em;
   min-width: 3em;
-  line-height: 36.4px
+  line-height: 36.4px;
+}
+
+// Primary button styling
+.mat-mdc-raised-button[color="primary"],
+.mat-mdc-flat-button[color="primary"] {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+// Accent button styling
+.mat-mdc-raised-button[color="accent"],
+.mat-mdc-flat-button[color="accent"] {
+  background-color: var(--accent-color) !important;
+  color: white !important;
+}
+
+// FAB (Floating Action Button) styling
+.mat-mdc-fab[color="primary"] {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.mat-mdc-fab[color="accent"] {
+  background-color: var(--accent-color) !important;
+  color: white !important;
 }
 
 .mat-standard-chip {
@@ -227,15 +339,12 @@ $theme: mat.define-theme((
   }
 }
 
-*{
-
-  margin: 0;
-  padding: 0;
-
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Roboto';
+  font-family: 'Roboto', "Helvetica Neue", sans-serif;
 }
 
 .error_card {
@@ -258,10 +367,7 @@ body {
 	color: var(--text-primary-lighter-color);
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; }
 
 @media (max-width: 600px) {
   body {

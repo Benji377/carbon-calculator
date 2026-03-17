@@ -11,14 +11,18 @@
 
         display: flex;
         justify-content: center;
+        background-color: #f3f5da;
 
         input{
             padding: 10px 10px 0px 10px;
             border-width: 0 0 2px;
             width: 80%;
+            background-color: #f3f5da;
+            border-color: var(--primary-color);
         }
         input:focus{
             outline: none;
+            border-color: var(--primary-color);
         }
         input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -33,8 +37,14 @@
             margin-top: auto;
         }
     }
+    @media screen and (max-width: 1024px) {
+        width: 85%;
+    }
     @media screen and (max-width: 800px) {
         width: 90%;
+    }
+    @media screen and (max-width: 600px) {
+        width: 95%;
     }
     .result{
         font-size: larger;

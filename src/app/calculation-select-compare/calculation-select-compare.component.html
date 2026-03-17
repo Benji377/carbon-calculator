@@ -2,7 +2,7 @@
   <mat-card class="error_card">{{ "diagram_compare_error" | translate }}</mat-card>
 }
 @if (calculations.length !== 0) {
-  <div class="content flex-column" style="gap: 15px;">
+  <div class="content flex-column" style="gap: 15px; padding: 5px 30px;">
     @for (calcs of calculations; track calcs) {
       <app-emission-item [name]="calcs.name" [link]="['/emission', id, 'diagram', calcs.id]" [emission]="calcs.calculate()"
       [factor_preset]="calcs.factor_preset" (deleteItself)="deleteCalculation($event)"></app-emission-item>
