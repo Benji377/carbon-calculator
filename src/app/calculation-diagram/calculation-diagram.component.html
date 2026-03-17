@@ -1,8 +1,4 @@
-<div (konami)="openKonami()"
-	gdColumns.gt-md="1fr 1fr"
-	gdColumns.lt-md="1fr"
-	gdGap="25px"
-	style="margin: 25px">
+<div class="grid-layout" style="margin: 25px;">
 	<mat-card (click)="openDialog('bar')" class="bar">
 		<app-bar-diagram [data]="data"></app-bar-diagram>
 	</mat-card>
@@ -11,7 +7,7 @@
 		<app-pie-diagram [data]="data"></app-pie-diagram>
 	</mat-card>
 
-	<mat-card gdColumn.gt-md="span 2" class="span">
+	<mat-card class="full-width">
 		<app-tree-diagram [data]="data"></app-tree-diagram>
 	</mat-card>
 </div>

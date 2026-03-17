@@ -1,9 +1,9 @@
 <div style="padding: 10px 30px;">
   @for (id of ids; track id) {
     <mat-card>
-      <mat-card-header>
-        <p fxFlex>{{ "types." + id | translate }}</p>
-        <p fxFlex style = "font-weight: bold;">[{{module.id == "electricity_emission_module" ?"kWh":"km"}}/{{"year"|translate}}]</p>
+      <mat-card-header class="flex-row align-space-between-center">
+        <p class="flex-grow">{{ "types." + id | translate }}</p>
+        <p class="flex-grow" style = "font-weight: bold;">[{{module.id == "electricity_emission_module" ?"kWh":"km"}}/{{"year"|translate}}]</p>
         <button (click)="create(id)" mat-icon-button class="icon" aria-label="addModule">
           <mat-icon>add</mat-icon>
         </button>

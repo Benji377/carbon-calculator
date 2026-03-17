@@ -1,6 +1,6 @@
 <mat-card>
 
-  <mat-card-header fxLayoutAlign="space-between center">
+  <mat-card-header class="flex-row align-space-between-center">
 
     <mat-card-title>{{ "modules." + module.id | translate }}</mat-card-title>
     <mat-icon routerLink="./{{ module.id }}"> border_color</mat-icon>
@@ -12,7 +12,7 @@
     <mat-card-content>
 
       @for (data of data; track data) {
-        <div class= "valueGroup" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="valueGroup flex-row align-space-between-center">
           <p let >{{ data?.number }} {{ module == undefined ? "" : module.unit | translate }}</p>
           <p let >{{ data?.result }} kg CO²</p>
         </div>

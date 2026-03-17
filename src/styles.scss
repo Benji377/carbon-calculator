@@ -1,8 +1,9 @@
-// __<<ngM2ThemingMigrationEscapedComment0>>__
+// Angular Material theming (Angular 21+)
+@use '@angular/material' as mat;
+@use 'sass:color';
+@use 'sass:map';
 
- @import '@angular/material/theming';
-
- @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100&display=swap');
 
 // // Include the common styles for Angular Material. We include this here so that you only
 // // have to load a single css file for Angular Material in your app.
@@ -92,12 +93,12 @@ $mat-dark-theme-foreground: (
 // // Background config
 // // Light bg
 $light-background:    #f3f5da;
-$light-bg-darker-5:   darken($light-background, 5%);
-$light-bg-darker-10:  darken($light-background, 10%);
-$light-bg-darker-20:  darken($light-background, 20%);
-$light-bg-darker-30:  darken($light-background, 30%);
-$light-bg-lighter-5:  lighten($light-background, 5%);
-$dark-bg-tooltip:     lighten(#2c2c2c, 20%);
+$light-bg-darker-5:   color.adjust($light-background, $lightness: -5%);
+$light-bg-darker-10:  color.adjust($light-background, $lightness: -10%);
+$light-bg-darker-20:  color.adjust($light-background, $lightness: -20%);
+$light-bg-darker-30:  color.adjust($light-background, $lightness: -30%);
+$light-bg-lighter-5:  color.adjust($light-background, $lightness: 5%);
+$dark-bg-tooltip:     color.adjust(#2c2c2c, $lightness: 20%);
 $dark-bg-alpha-4:     rgba(#2c2c2c, 0.04);
 $dark-bg-alpha-12:    rgba(#2c2c2c, 0.12);
 
@@ -121,10 +122,10 @@ $mat-light-theme-background: (
 
 // Dark bg
 $dark-background:     #2c2c2c;
-$dark-bg-lighter-5:   lighten($dark-background, 5%);
-$dark-bg-lighter-10:  lighten($dark-background, 10%);
-$dark-bg-lighter-20:  lighten($dark-background, 20%);
-$dark-bg-lighter-30:  lighten($dark-background, 30%);
+$dark-bg-lighter-5:   color.adjust($dark-background, $lightness: 5%);
+$dark-bg-lighter-10:  color.adjust($dark-background, $lightness: 10%);
+$dark-bg-lighter-20:  color.adjust($dark-background, $lightness: 20%);
+$dark-bg-lighter-30:  color.adjust($dark-background, $lightness: 30%);
 $light-bg-alpha-4:    rgba(#f3f5da, 0.04);
 $light-bg-alpha-12:   rgba(#f3f5da, 0.12);
 
@@ -147,85 +148,60 @@ $mat-dark-theme-background: (
   disabled-list-option:     $dark-bg-lighter-10,
 );
 
-// // Compute font config
- @include mat-core($fontConfig);
+// Full Angular Material theming via the new v21 theming API
+// See https://material.angular.io/guide/theming for details.
 
-// // Theme Config
-
-body {
-  --primary-color: #59981a;
-  --primary-lighter-color: #cde0ba;
-  --primary-darker-color: #3e7b0f;
-  --text-primary-color: #{$light-primary-text};
-  --text-primary-lighter-color: #{$dark-primary-text};
-  --text-primary-darker-color: #{$light-primary-text};
-}
-$mat-primary: (
-  main: #59981a,
-  lighter: #cde0ba,
-  darker: #3e7b0f,
-  200: #59981a, // For slide toggle,
-  contrast : (
-    main: $light-primary-text,
-    lighter: $dark-primary-text,
-    darker: $light-primary-text,
-  )
+$color-config: (
+  primary: map.merge(mat.$green-palette, (
+    secondary: mat.$chartreuse-palette,
+    error: mat.$red-palette,
+  )),
 );
-$theme-primary: mat-palette($mat-primary, main, lighter, darker);
 
+$theme: mat.define-theme((
+  color: $color-config,
+));
 
-body {
-  --accent-color: #81b622;
-  --accent-lighter-color: #d9e9bd;
-  --accent-darker-color: #649e14;
-  --text-accent-color: #{$dark-primary-text};
-  --text-accent-lighter-color: #{$dark-primary-text};
-  --text-accent-darker-color: #{$light-primary-text};
-}
-$mat-accent: (
-  main: #81b622,
-  lighter: #d9e9bd,
-  darker: #649e14,
-  200: #81b622, // For slide toggle,
-  contrast : (
-    main: $dark-primary-text,
-    lighter: $dark-primary-text,
-    darker: $light-primary-text,
-  )
-);
-$theme-accent: mat-palette($mat-accent, main, lighter, darker);
-
-
-body {
-  --warn-color: #ed5d4c;
-  --warn-lighter-color: #facec9;
-  --warn-darker-color: #e54133;
-  --text-warn-color: #{$dark-primary-text};
-  --text-warn-lighter-color: #{$dark-primary-text};
-  --text-warn-darker-color: #{$light-primary-text};
-}
-$mat-warn: (
-  main: #ed5d4c,
-  lighter: #facec9,
-  darker: #e54133,
-  200: #ed5d4c, // For slide toggle,
-  contrast : (
-    main: $dark-primary-text,
-    lighter: $dark-primary-text,
-    darker: $light-primary-text,
-  )
-);
-$theme-warn: mat-palette($mat-warn, main, lighter, darker);
-;
-
-$theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
-$altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
-
-// Theme Init
-@include angular-material-theme($theme);
+@include mat.all-component-bases($theme);
+@include mat.all-component-themes($theme);
 
 .theme-alternate {
-  @include angular-material-theme($altTheme);
+  $dark-theme: mat.define-theme((
+    color: map.merge($color-config, (theme-type: dark)),
+  ));
+
+  @include mat.all-component-bases($dark-theme);
+  @include mat.all-component-themes($dark-theme);
+}
+
+// Helpers (replaces @angular/flex-layout usage)
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-grow {
+  flex: 1 1 0%;
+}
+
+.align-space-between-center {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
 }
 
 // Specific component overrides, pieces that are not in line with the general theming

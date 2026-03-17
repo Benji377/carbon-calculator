@@ -5,13 +5,13 @@
     }
     @for (subModule of submodules; track subModule) {
       <mat-card>
-        <mat-card-header fxLayoutAlign="space-between center">
+        <mat-card-header class="flex-row align-space-between-center">
           <mat-card-title>{{ "types." + subModule.id | translate }}</mat-card-title>
           <mat-icon routerLink="./{{ subModule.id }}"> border_color</mat-icon>
         </mat-card-header>
         <hr>
           <mat-card-content>
-            <div class= "valueGroup" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="valueGroup flex-row align-space-between-center">
               <p let >{{ subModule.number }} {{ module.unit | translate}}</p>
               <p let >{{ subModule.number * factorManager.get(module.id + "_" + subModule.id) }} kg CO²</p>
             </div>

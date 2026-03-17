@@ -1,4 +1,4 @@
-<div class="content" fxLayout="column" fxLayoutGap="15px" style="padding: 5px 30px;">
+<div class="content flex-column" style="padding: 5px 30px; gap: 15px;">
   @for (module of modules; track module) {
     <app-calculation-card [module]="module" [factorManager]="factorManager"></app-calculation-card>
   }

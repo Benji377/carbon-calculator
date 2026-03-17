@@ -1,7 +1,6 @@
 import { NgModule, inject, provideAppInitializer } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxEchartsModule } from 'ngx-echarts';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,15 +12,13 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { CalculationListComponent } from './calculation-list/calculation-list.component';
 import { CalculationCardComponent } from './calculation-card/calculation-card.component';
 import { SpecificCalculationListComponent } from './specific-calculation-list/specific-calculation-list.component';
-import { CalculationDiagramComponent, DiagramDialogComponent, KonamiDialogComponent } from './calculation-diagram/calculation-diagram.component';
+import { CalculationDiagramComponent, DiagramDialogComponent } from './calculation-diagram/calculation-diagram.component';
 import { CreateCalculationComponent } from './create-calculation/create-calculation.component';
 
 import { NavigationService } from './shared/navigation.service';
 import { MenuService } from './shared/menu.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularResizeEventModule } from 'angular-resize-event';
 import { FormsModule } from '@angular/forms';
-import { KonamiModule } from 'ngx-konami';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
@@ -84,7 +81,6 @@ import { FooterComponent } from './footer/footer.component';
         SettingsComponent,
         DiagramDialogComponent,
         DiagramCompareDialogComponent,
-        KonamiDialogComponent,
         FileUploadComponent,
         ImportFileDialogComponent,
         FooterComponent,
@@ -95,8 +91,6 @@ import { FooterComponent } from './footer/footer.component';
             echarts: () => import('echarts')
         }),
         BrowserAnimationsModule,
-        AngularResizeEventModule,
-        FlexLayoutModule,
         MatButtonModule,
         MatInputModule,
         MatFormFieldModule,
@@ -118,7 +112,6 @@ import { FooterComponent } from './footer/footer.component';
         MatSelectModule,
         MatDialogModule,
         MatSnackBarModule,
-        KonamiModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
             // Register the ServiceWorker as soon as the application is stable
@@ -129,7 +122,7 @@ import { FooterComponent } from './footer/footer.component';
         CalculationService,
         MenuService,
         provideAppInitializer(() => {
-        const initializerFn = ((tms: TranslationManagerService) => () => tms.load())(inject(TranslationManagerService), inject(TranslateService));
+        const initializerFn = ((tms: TranslationManagerService) => () => tms.load())(inject(TranslationManagerService));
         return initializerFn();
       }),
         provideHttpClient(withInterceptorsFromDi())

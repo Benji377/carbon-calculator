@@ -96,12 +96,6 @@ export class CalculationDiagramComponent implements OnInit {
 		this.dialog.open(DiagramDialogComponent, { width: "95%", data: { type, data: this.data } });
 	}
 
-	/**
-   * @ignore
-	 */
-	openKonami() {
-		this.dialog.open(KonamiDialogComponent, { width: "95%" });
-	}
 }
 /**
  * This is a type alias for a string. It is used to define the type of the dialog that
@@ -162,18 +156,4 @@ export class DiagramDialogComponent{
 	){}
 }
 
-/**
- * @ignore
- */
-@Component({
-    selector: 'app-konami-dialog',
-    template: `<img src="assets/oxygen-carbon.gif"/>`,
-    styles: ["img { width: 100%; height: auto; }"],
-    styleUrls: [],
-    standalone: false
-})
-
-export class KonamiDialogComponent{
-	constructor(){}
-}
 

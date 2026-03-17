@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -7,7 +7,6 @@ import { CalculationService } from '../_services/calculation.service';
 import { TranslationManagerService } from '../_services/translation-manager.service';
 import { DiagramDataCompare } from '../shared';
 
-import { ResizedEvent } from 'angular-resize-event';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FactorManager } from '../emissionmodule/factor-manager';
 /**
@@ -83,6 +82,7 @@ export class CalculationDiagramCompareComponent implements OnInit {
 			}
       // Initializes the chart and the table with the data of the two calculations
 			this.loadChart();
+			this.updateDisplayedColumns(window.innerWidth);
 		});
 	}
 /**
@@ -125,16 +125,18 @@ export class CalculationDiagramCompareComponent implements OnInit {
 		return Math.floor((one - two) * 100) / 100;
 	}
   /**
-   *  A method that runs when the diagram is resized. It adjusts the columns displayed in the table based on the new width of the diagram.
-   * @param event The ResizedEvent containing the new width of the diagram
+   * Adjusts the displayed table columns based on the current viewport width.
+   * @param width Window inner width.
    */
-	onResize(event: ResizedEvent){
-		if(event.newRect.width <= 500){
-			this.displayedColumns = ["name", "dataone", "datatwo"];
-		}else{
-			this.displayedColumns = ["name", "dataone", "datatwo", "diff"];
-		}
-	}
+  private updateDisplayedColumns(width: number) {
+    this.displayedColumns = width <= 500 ? ["name", "dataone", "datatwo"] : ["name", "dataone", "datatwo", "diff"];
+  }
+
+  @HostListener('window:resize', ['$event'])
+  public onWindowResize(event: UIEvent) {
+    const width = (event.target as Window).innerWidth;
+    this.updateDisplayedColumns(width);
+  }
   /**
    * A method that opens a dialog displaying a different type of diagram.
    * @param type
