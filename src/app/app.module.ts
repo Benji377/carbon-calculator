@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule, inject, provideAppInitializer } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -37,7 +37,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TranslationManagerService } from './_services/translation-manager.service';
 import { TreeDiagramComponent } from './calculation-diagram/tree-diagram/tree-diagram.component';
 import { CalculationDiagramCompareComponent, DiagramCompareDialogComponent } from './calculation-diagram-compare/calculation-diagram-compare.component';
@@ -59,89 +59,81 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FooterComponent } from './footer/footer.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    EmissionItemComponent,
-    EmissionListComponent,
-    NavigationComponent,
-    CalculationListComponent,
-    CalculationCardComponent,
-    SpecificCalculationListComponent,
-    CalculationDiagramComponent,
-    BarDiagramComponent,
-    PieDiagramComponent,
-    CreateCalculationComponent,
-    TreeDiagramComponent,
-    CalculationDiagramCompareComponent,
-    BarDiagramCompareComponent,
-    BarDiagramBothComponent,
-    CreateModuleComponent,
-    FactorEmissionModuleComponent,
-    TypeEmissionModuleComponent,
-    CreateTypeComponent,
-    TypeInputComponent,
-    CalculationSelectCompareComponent,
-    SettingsComponent,
-    DiagramDialogComponent,
-    DiagramCompareDialogComponent,
-    KonamiDialogComponent,
-    FileUploadComponent,
-	  ImportFileDialogComponent,
-   FooterComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgxEchartsModule.forRoot({
-      echarts: () => import('echarts')
-    }),
-    BrowserAnimationsModule,
-	  AngularResizeEventModule,
-	  FlexLayoutModule,
-    MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatMenuModule,
-    HttpClientModule,
-    FormsModule,
-    TranslateModule.forRoot({
-      defaultLanguage: "en",
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [ HttpClient ]
-      }
-    }),
-    MatSelectModule,
-	MatDialogModule,
-	MatSnackBarModule,
-	KonamiModule,
- ServiceWorkerModule.register('ngsw-worker.js', {
-   enabled: environment.production,
-   // Register the ServiceWorker as soon as the application is stable
-   // or after 30 seconds (whichever comes first).
-   registrationStrategy: 'registerWhenStable:30000'
- })
-  ],
-  providers: [
-    NavigationService,
-    CalculationService,
-    MenuService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (tms: TranslationManagerService) => () => tms.load(),
-      deps: [TranslationManagerService, TranslateService],
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        EmissionItemComponent,
+        EmissionListComponent,
+        NavigationComponent,
+        CalculationListComponent,
+        CalculationCardComponent,
+        SpecificCalculationListComponent,
+        CalculationDiagramComponent,
+        BarDiagramComponent,
+        PieDiagramComponent,
+        CreateCalculationComponent,
+        TreeDiagramComponent,
+        CalculationDiagramCompareComponent,
+        BarDiagramCompareComponent,
+        BarDiagramBothComponent,
+        CreateModuleComponent,
+        FactorEmissionModuleComponent,
+        TypeEmissionModuleComponent,
+        CreateTypeComponent,
+        TypeInputComponent,
+        CalculationSelectCompareComponent,
+        SettingsComponent,
+        DiagramDialogComponent,
+        DiagramCompareDialogComponent,
+        KonamiDialogComponent,
+        FileUploadComponent,
+        ImportFileDialogComponent,
+        FooterComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        NgxEchartsModule.forRoot({
+            echarts: () => import('echarts')
+        }),
+        BrowserAnimationsModule,
+        AngularResizeEventModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatInputModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatCardModule,
+        MatTableModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatMenuModule,
+        FormsModule,
+        TranslateModule.forRoot({
+            defaultLanguage: "en",
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        MatSelectModule,
+        MatDialogModule,
+        MatSnackBarModule,
+        KonamiModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: environment.production,
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
+        })], providers: [
+        NavigationService,
+        CalculationService,
+        MenuService,
+        provideAppInitializer(() => {
+        const initializerFn = ((tms: TranslationManagerService) => () => tms.load())(inject(TranslationManagerService), inject(TranslateService));
+        return initializerFn();
+      }),
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
 /**
  * The HttpLoaderFactory is a function that is used to create an instance of the TranslateHttpLoader

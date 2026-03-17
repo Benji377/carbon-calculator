@@ -3,9 +3,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
  * The FileUploadComponent class is responsible for providing a file upload functionality in the Angular application. Here's the documentation:
  */
 @Component({
-  selector: 'app-file-upload',
-  templateUrl: './file-upload.component.html',
-  styleUrls: ['./file-upload.component.scss']
+    selector: 'app-file-upload',
+    templateUrl: './file-upload.component.html',
+    styleUrls: ['./file-upload.component.scss'],
+    standalone: false
 })
 export class FileUploadComponent{
   /**

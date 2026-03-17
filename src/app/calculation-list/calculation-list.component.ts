@@ -19,9 +19,10 @@ import { FactorManager } from '../emissionmodule/factor-manager';
  * and deleting calculations
  */
 @Component({
-  selector: 'app-calculation-list',
-  templateUrl: './calculation-list.component.html',
-  styleUrls: ['./calculation-list.component.scss']
+    selector: 'app-calculation-list',
+    templateUrl: './calculation-list.component.html',
+    styleUrls: ['./calculation-list.component.scss'],
+    standalone: false
 })
 export class CalculationListComponent implements OnInit{
   /**

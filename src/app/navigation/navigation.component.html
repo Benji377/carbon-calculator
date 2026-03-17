@@ -1,30 +1,38 @@
 
 <mat-toolbar color="primary" [class.flex-start]="menuPoints.length < 1">
-  <button *ngIf="back" [routerLink]="back" mat-icon-button class="icon" aria-label="back" class = "back">
-    <mat-icon>keyboard_backspace</mat-icon>
-  </button>
+  @if (back) {
+    <button [routerLink]="back" mat-icon-button class="icon" aria-label="back" class = "back">
+      <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+  }
   <button mat-icon-button [routerLink]="['/emission']" class="logo">
     <img src="assets/logo.png" alt="Logo"  />
   </button>
   <div class="long-title"><span class="title">{{ maintitle }}</span><span class="title">{{ title2 }}</span> <span style="margin-left: 5px;"><strong >{{ title }}</strong></span></div>
 
-  <span *ngIf="menuPoints.length>1; else settings">
-    <button [matMenuTriggerFor]="menu" aria-label="menu" style="display: flex;" class="menu">
-      <span style="margin-right: 5px; margin-top: 5%;" class="menuname">Menu</span>
-      <mat-icon>more_vert</mat-icon>
-    </button>
-
-    <mat-menu #menu="matMenu" class="fixmenu">
-      <button class="menuPoints" *ngFor="let menuPoint of menuPoints" mat-menu-item (click)="handleClick(menuPoint)" >
-        <mat-icon *ngIf="menuPoint.icon!=''">{{ menuPoint.icon }}</mat-icon>
-        <span>{{ menuPoint.menuPointName }}</span>
+  @if (menuPoints.length>1) {
+    <span>
+      <button [matMenuTriggerFor]="menu" aria-label="menu" style="display: flex;" class="menu">
+        <span style="margin-right: 5px; margin-top: 5%;" class="menuname">Menu</span>
+        <mat-icon>more_vert</mat-icon>
       </button>
-    </mat-menu>
-  </span>
-  <ng-template #settings>
-    <button *ngIf="menuPoints.length >0" aria-label="menu" class="menuPoints" mat-icon-button (click)="handleClick(menuPoints[0])" >
-      <mat-icon> {{menuPoints[0].icon}}</mat-icon>
-    </button>
-  </ng-template>
+      <mat-menu #menu="matMenu" class="fixmenu">
+        @for (menuPoint of menuPoints; track menuPoint) {
+          <button class="menuPoints" mat-menu-item (click)="handleClick(menuPoint)" >
+            @if (menuPoint.icon!='') {
+              <mat-icon>{{ menuPoint.icon }}</mat-icon>
+            }
+            <span>{{ menuPoint.menuPointName }}</span>
+          </button>
+        }
+      </mat-menu>
+    </span>
+  } @else {
+    @if (menuPoints.length >0) {
+      <button aria-label="menu" class="menuPoints" mat-icon-button (click)="handleClick(menuPoints[0])" >
+        <mat-icon> {{menuPoints[0].icon}}</mat-icon>
+      </button>
+    }
+  }
 
 </mat-toolbar>

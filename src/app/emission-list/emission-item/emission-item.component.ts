@@ -6,9 +6,10 @@ import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
  * This is an Angular component that is used to display an individual emission calculation.
  */
 @Component({
-  selector: 'app-emission-item',
-  templateUrl: './emission-item.component.html',
-  styleUrls: ['./emission-item.component.scss']
+    selector: 'app-emission-item',
+    templateUrl: './emission-item.component.html',
+    styleUrls: ['./emission-item.component.scss'],
+    standalone: false
 })
 export class EmissionItemComponent {
 

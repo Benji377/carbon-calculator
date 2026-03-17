@@ -13,9 +13,10 @@ import { CalculationService } from '../_services/calculation.service';
  * The SpecificCalculationListComponent is used to display a list of emissions calculations
  */
 @Component({
-  selector: 'app-specific-calculation-list',
-  templateUrl: './specific-calculation-list.component.html',
-  styleUrls: ['./specific-calculation-list.component.scss']
+    selector: 'app-specific-calculation-list',
+    templateUrl: './specific-calculation-list.component.html',
+    styleUrls: ['./specific-calculation-list.component.scss'],
+    standalone: false
 })
 
 export class SpecificCalculationListComponent implements OnInit {

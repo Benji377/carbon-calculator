@@ -18,9 +18,10 @@ interface Language{
  * to select a language and saving the selected language.
  */
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+    selector: 'app-settings',
+    templateUrl: './settings.component.html',
+    styleUrls: ['./settings.component.scss'],
+    standalone: false
 })
 export class SettingsComponent implements OnInit {
   /** A variable of type Language that stores the currently selected language. It is initialized as undefined. */

@@ -1,22 +1,28 @@
 <div class="container">
-    <form [formGroup]="createForm" (ngSubmit)="create()" fxLayout="column">
-        <mat-form-field appearance="fill">
-            <mat-label>{{ "organisationname" | translate }}</mat-label>
-            <input matInput placeholder='{{"name"|translate}}' formControlName="name">
-            <mat-error *ngIf="createForm.get('name')?.hasError('required')">
-                {{ "name_empty" | translate }}
-            </mat-error>
-            <mat-error *ngIf="createForm.get('name')?.hasError('minlength')">
-                {{ "name_length" | translate }}
-            </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>{{ "country" | translate }}</mat-label>
-            <mat-select formControlName="factors">
-              <mat-option *ngFor="let factor_preset of PRESET_FACTORS_LIST" [value]="factor_preset">{{"factor_preset." + factor_preset | translate}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <button mat-flat-button color="primary" type="submit" [disabled]="!createForm.valid">{{ "add_button" | translate }}</button>
-    </form>
+  <form [formGroup]="createForm" (ngSubmit)="create()" fxLayout="column">
+    <mat-form-field appearance="fill">
+      <mat-label>{{ "organisationname" | translate }}</mat-label>
+      <input matInput placeholder='{{"name"|translate}}' formControlName="name">
+      @if (createForm.get('name')?.hasError('required')) {
+        <mat-error>
+          {{ "name_empty" | translate }}
+        </mat-error>
+      }
+      @if (createForm.get('name')?.hasError('minlength')) {
+        <mat-error>
+          {{ "name_length" | translate }}
+        </mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ "country" | translate }}</mat-label>
+      <mat-select formControlName="factors">
+        @for (factor_preset of PRESET_FACTORS_LIST; track factor_preset) {
+          <mat-option [value]="factor_preset">{{"factor_preset." + factor_preset | translate}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <button mat-flat-button color="primary" type="submit" [disabled]="!createForm.valid">{{ "add_button" | translate }}</button>
+  </form>
 </div>
 <app-footer></app-footer>

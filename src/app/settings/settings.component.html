@@ -3,9 +3,11 @@
   <mat-form-field appearance="fill">
     <mat-label>{{ "language" | translate }}</mat-label>
     <mat-select [(ngModel)]="selectedLanguage" aria-label="Select language">
-      <mat-option *ngFor="let language of languages" [value]="language">
-        {{ language.name }}
-      </mat-option>
+      @for (language of languages; track language) {
+        <mat-option [value]="language">
+          {{ language.name }}
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
 

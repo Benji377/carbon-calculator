@@ -11,9 +11,10 @@ import { TranslationManagerService } from 'src/app/_services/translation-manager
  * It displays a list of all SubModules in use of the AdvancedEmissionModule.
  */
 @Component({
-  selector: 'app-type-emission-module',
-  templateUrl: './type-emission-module.component.html',
-  styleUrls: ['./type-emission-module.component.scss']
+    selector: 'app-type-emission-module',
+    templateUrl: './type-emission-module.component.html',
+    styleUrls: ['./type-emission-module.component.scss'],
+    standalone: false
 })
 export class TypeEmissionModuleComponent implements OnInit {
   /**

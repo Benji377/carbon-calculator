@@ -28,9 +28,10 @@ interface TableData {
  * The component also displays a table that lists the difference in emissions of each module between the two calculations.
  */
 @Component({
-  selector: 'app-calculation-diagram-compare',
-  templateUrl: './calculation-diagram-compare.component.html',
-  styleUrls: ['./calculation-diagram-compare.component.scss']
+    selector: 'app-calculation-diagram-compare',
+    templateUrl: './calculation-diagram-compare.component.html',
+    styleUrls: ['./calculation-diagram-compare.component.scss'],
+    standalone: false
 })
 export class CalculationDiagramCompareComponent implements OnInit {
   /** An object containing the data for the two calculations to be compared */
@@ -160,15 +161,22 @@ interface DialogData{
  *  and if data.type is 'bar-compare', then the app-bar-diagram-compare component will be displayed.
  */
 @Component({
-	selector: 'app-diagram-dialog',
-	template: `
-	<div [ngSwitch]="data.type">
-		<div *ngSwitchCase="'bar-both'"> <app-bar-diagram-both [data]="data.data"></app-bar-diagram-both> </div>
-		<div *ngSwitchCase="'bar-compare'"> <app-bar-diagram-compare [data]="data.data"></app-bar-diagram-compare> </div>
+    selector: 'app-diagram-dialog',
+    template: `
+	<div>
+	  @switch (data.type) {
+	    @case ('bar-both') {
+	      <div> <app-bar-diagram-both [data]="data.data"></app-bar-diagram-both> </div>
+	    }
+	    @case ('bar-compare') {
+	      <div> <app-bar-diagram-compare [data]="data.data"></app-bar-diagram-compare> </div>
+	    }
+	  }
 	</div>
 	`,
-	styleUrls: []
-  })
+    styleUrls: [],
+    standalone: false
+})
 export class DiagramCompareDialogComponent{
   /**
    * The DialogData containing the data to be displayed in the dialog box

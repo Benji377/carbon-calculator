@@ -10,9 +10,10 @@ import { TranslationManagerService } from '../_services/translation-manager.serv
  * The EmissionListComponent is used to display a list of emissions calculations
  */
 @Component({
-  selector: 'app-emission-list',
-  templateUrl: './emission-list.component.html',
-  styleUrls: ['./emission-list.component.scss']
+    selector: 'app-emission-list',
+    templateUrl: './emission-list.component.html',
+    styleUrls: ['./emission-list.component.scss'],
+    standalone: false
 })
 
 
