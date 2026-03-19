@@ -4,6 +4,9 @@ import { MODULE_CATALOG } from '../data/moduleCatalog';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, CartesianGrid } from 'recharts';
 import { t } from '../i18n';
 
+// CO2 offset per tree per year (kg) - based on average mature tree absorption
+const CO2_PER_TREE_PER_YEAR = 21;
+
 export function StatisticsView() {
   // 1. Local UI State for comparisons
   const compareOrg1 = useSignal<string>(organizations.value[0]?.id || "");
@@ -19,9 +22,16 @@ export function StatisticsView() {
     }, 0);
   };
 
+  // 2b. Helper to calculate trees needed to offset CO2
+  const getTreesNeeded = (co2: number) => {
+    return Math.ceil(co2 / CO2_PER_TREE_PER_YEAR);
+  };
+
   // 3. Computed Totals for our colored indicators
   const total1 = useComputed(() => getOrgTotal(compareOrg1.value));
   const total2 = useComputed(() => getOrgTotal(compareOrg2.value));
+  const trees1 = useComputed(() => getTreesNeeded(total1.value));
+  const trees2 = useComputed(() => getTreesNeeded(total2.value));
 
   // 4. Transform data for Recharts
   const chartData = useComputed(() => {
@@ -76,12 +86,26 @@ export function StatisticsView() {
         <div class="p-4 sm:p-6 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
           <p class="m-0 text-xs sm:text-sm text-blue-700 font-bold">{t('baselineTotalCO2')}</p>
           <h3 class="m-0 mt-2 text-lg sm:text-2xl text-blue-900 font-bold">{total1.value.toLocaleString()} kg</h3>
+          <div class="mt-3 flex items-center gap-2">
+            <span class="text-2xl">🌳</span>
+            <div>
+              <p class="m-0 text-xs text-blue-600">{t('treesNeededLabel') || 'Trees Needed'}</p>
+              <p class="m-0 text-lg sm:text-xl font-bold text-blue-900">{trees1.value.toLocaleString()}</p>
+            </div>
+          </div>
         </div>
         
         {compareOrg2.value && (
           <div class="p-4 sm:p-6 bg-purple-50 border-l-4 border-purple-500 rounded-r-lg">
             <p class="m-0 text-xs sm:text-sm text-purple-700 font-bold">{t('comparisonTotalCO2')}</p>
             <h3 class="m-0 mt-2 text-lg sm:text-2xl text-purple-900 font-bold">{total2.value.toLocaleString()} kg</h3>
+            <div class="mt-3 flex items-center gap-2">
+              <span class="text-2xl">🌳</span>
+              <div>
+                <p class="m-0 text-xs text-purple-600">{t('treesNeededLabel') || 'Trees Needed'}</p>
+                <p class="m-0 text-lg sm:text-xl font-bold text-purple-900">{trees2.value.toLocaleString()}</p>
+              </div>
+            </div>
           </div>
         )}
       </div>

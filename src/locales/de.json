@@ -50,6 +50,8 @@
   "singleView": "Keine (Einzelansicht)",
   "baselineTotalCO2": "Basis-Gesamt-CO2",
   "comparisonTotalCO2": "Vergleichs-Gesamt-CO2",
+  "treesNeededLabel": "Erforderliche Bäume",
+  "treesNeeded": "Bäume zur Minderung der CO2-Emissionen erforderlich",
   "emissionsByModule": "Emissionen nach Modultyp",
   "baselineOrg": "Basis-Org",
   "comparisonOrg": "Vergleichs-Org",

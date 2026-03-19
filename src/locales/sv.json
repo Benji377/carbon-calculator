@@ -50,6 +50,8 @@
   "singleView": "Ingen (enstaka vy)",
   "baselineTotalCO2": "Baseline totala CO2",
   "comparisonTotalCO2": "Jämfört totala CO2",
+  "treesNeededLabel": "Träd behövda",
+  "treesNeeded": "Träd behövda för att minska CO2-utsläpp",
   "emissionsByModule": "Utsläpp efter modultyp",
   "baselineOrg": "Baseline org",
   "comparisonOrg": "Jämför org",
