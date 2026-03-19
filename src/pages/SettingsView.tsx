@@ -49,7 +49,7 @@ export function SettingsView() {
 
   return (
     <div style={{ padding: '1rem' }}>
-      <h2 style={{ marginBottom: '2rem' }}>{t('settings')}</h2>
+      <h2 class="text-3xl font-bold mb-8 text-gray-900">⚙️ {t('settings')}</h2>
 
       {/* --- LANGUAGE SELECTOR --- */}
       <div style={{ marginBottom: '2rem', padding: '1.5rem', border: '1px solid #e5e7eb', borderRadius: '8px', background: 'white' }}>

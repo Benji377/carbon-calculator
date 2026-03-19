@@ -10,6 +10,8 @@ export interface ModuleDef {
   id: string;
   title: string;
   description: string;
+  unit: string; // e.g., "pieces", "kg", "km", "kWh"
+  icon: string; // emoji or icon for display
   submodules?: SubmoduleDef[];
   // The formula function that calculates CO2 based on the given value
   calculateCO2: (value: number, submoduleValues: Record<string, number> | undefined, country: CountryCode) => number;

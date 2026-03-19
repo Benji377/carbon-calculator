@@ -9,7 +9,7 @@ const initialOrgs: Organization[] = savedData ? JSON.parse(savedData) : [];
 // 2. Define Signals
 export const organizations = signal<Organization[]>(initialOrgs);
 export const activeOrgId = signal<string | null>(null);
-export const currentView = signal<"orgs" | "dashboard" | "settings" | "stats">("orgs");
+export const currentView = signal<"orgs" | "dashboard" | "settings" | "stats" | "about">("orgs");
 
 // 3. Auto-save to LocalStorage whenever 'organizations' changes
 effect(() => {
@@ -57,6 +57,25 @@ export function addModuleInstance(defId: string) {
   });
 }
 
+export function addModuleInstanceWithValues(defId: string, value: number, submoduleValues?: Record<string, number>) {
+  const currentOrgId = activeOrgId.value;
+  if (!currentOrgId) return;
+
+  // We update the signal immutably so the UI knows to re-render
+  organizations.value = organizations.value.map(org => {
+    if (org.id === currentOrgId) {
+      return {
+        ...org,
+        modules: [
+          ...org.modules,
+          { id: crypto.randomUUID(), defId, value, submoduleValues: submoduleValues || {} }
+        ]
+      };
+    }
+    return org;
+  });
+}
+
 export function updateModuleValue(moduleId: string, newValue: number) {
   const currentOrgId = activeOrgId.value;
   if (!currentOrgId) return;
@@ -87,4 +106,26 @@ export function updateModuleInstance(updatedModule: ModuleInstance) {
     }
     return org;
   });
+}
+
+export function deleteModuleInstance(moduleId: string) {
+  const currentOrgId = activeOrgId.value;
+  if (!currentOrgId) return;
+
+  organizations.value = organizations.value.map(org => {
+    if (org.id === currentOrgId) {
+      return {
+        ...org,
+        modules: org.modules.filter(mod => mod.id !== moduleId)
+      };
+    }
+    return org;
+  });
+}
+
+export function deleteOrganization(id: string) {
+  organizations.value = organizations.value.filter(org => org.id !== id);
+  if (activeOrgId.value === id) {
+    selectOrganization(null);
+  }
 }

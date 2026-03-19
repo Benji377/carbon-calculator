@@ -14,7 +14,7 @@ export function StatisticsView() {
     if (!org) return 0;
     return org.modules.reduce((sum, mod) => {
       const def = MODULE_CATALOG[mod.defId];
-      return sum + (def ? def.calculateCO2(mod.value, mod.submoduleValues) : 0);
+      return sum + (def ? def.calculateCO2(mod.value, mod.submoduleValues, org.country) : 0);
     }, 0);
   };
 
@@ -36,12 +36,12 @@ export function StatisticsView() {
 
     org1?.modules.forEach(mod => {
       const def = MODULE_CATALOG[mod.defId];
-      if (def) dataMap[mod.defId].org1 += def.calculateCO2(mod.value, mod.submoduleValues);
+      if (def) dataMap[mod.defId].org1 += def.calculateCO2(mod.value, mod.submoduleValues, org1.country);
     });
 
     org2?.modules.forEach(mod => {
       const def = MODULE_CATALOG[mod.defId];
-      if (def) dataMap[mod.defId].org2 += def.calculateCO2(mod.value, mod.submoduleValues);
+      if (def) dataMap[mod.defId].org2 += def.calculateCO2(mod.value, mod.submoduleValues, org2.country);
     });
 
     // Only return modules that actually have data
@@ -50,7 +50,7 @@ export function StatisticsView() {
 
   return (
     <div style={{ padding: '1rem' }}>
-      <h2 style={{ marginBottom: '1.5rem' }}>Analytics & Comparison</h2>
+      <h2 class="text-3xl font-bold mb-8 text-gray-900">📈 Analytics & Comparison</h2>
 
       {/* --- CONTROL PANEL --- */}
       <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', background: '#f9fafb', padding: '1rem', borderRadius: '8px', border: '1px solid #e5e7eb' }}>

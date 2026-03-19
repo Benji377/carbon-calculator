@@ -29,13 +29,13 @@ export function EditModuleModal({ moduleInstance, onClose, onSave }: Props) {
   return (
     <div class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
       <div class="bg-white rounded-lg p-6 max-w-md w-full shadow-xl">
-        <h2 class="text-xl font-bold mb-2">Edit {def.title}</h2>
+        <h2 class="text-xl font-bold mb-2">{def.icon} Edit {def.title}</h2>
         <p class="text-gray-600 text-sm mb-6">{def.description}</p>
 
         {/* Show Main Value Input ONLY if there are no submodules */}
         {(!def.submodules || def.submodules.length === 0) && (
           <div class="mb-4">
-            <label class="block text-sm font-bold mb-2">Value</label>
+            <label class="block text-sm font-bold mb-2">Value ({def.unit})</label>
             <input 
               type="number" min="0" step="0.1"
               value={mainValue} 
@@ -48,7 +48,7 @@ export function EditModuleModal({ moduleInstance, onClose, onSave }: Props) {
         {/* Show Submodule Inputs if they exist */}
         {def.submodules && def.submodules.length > 0 && (
           <div class="space-y-3 mb-6">
-            <p class="font-bold text-sm text-gray-700">Enter Values by Type:</p>
+            <p class="font-bold text-sm text-gray-700">Enter Values by Type ({def.unit}):</p>
             {def.submodules.map(sub => (
               <div key={sub.id} class="flex justify-between items-center gap-4">
                 <label class="text-sm text-gray-600 flex-1">{sub.title}</label>
@@ -64,7 +64,7 @@ export function EditModuleModal({ moduleInstance, onClose, onSave }: Props) {
         )}
 
         <div class="flex justify-end gap-3 mt-8">
-          <button onClick={onClose} class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded">Cancel</button>
+          <button onClick={onClose} class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded font-medium">Cancel</button>
           <button onClick={handleSave} class="px-4 py-2 bg-green-700 text-white font-bold rounded hover:bg-green-800">
             Save Changes
           </button>

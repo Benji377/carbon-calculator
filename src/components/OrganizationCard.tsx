@@ -1,5 +1,13 @@
 // src/components/OrganizationCard.tsx
 import type { Organization } from '../types';
+import { COUNTRY_NAMES } from '../data/factors';
+
+const COUNTRY_FLAGS: Record<string, string> = {
+  it: '🇮🇹',
+  at: '🇦🇹',
+  es: '🇪🇸',
+  sv: '🇸🇪',
+};
 
 interface Props {
   org: Organization;
@@ -7,24 +15,32 @@ interface Props {
 }
 
 export function OrganizationCard({ org, onClick }: Props) {
+  const flag = COUNTRY_FLAGS[org.country] || '🌍';
+  const countryName = COUNTRY_NAMES[org.country] || 'Unknown';
+  
+  // Truncate description after 80 characters with ellipsis
+  const truncatedDesc = org.description && org.description.length > 80 
+    ? org.description.substring(0, 80).trim() + '...'
+    : org.description;
+  
   return (
     <div 
       onClick={onClick}
-      style={{ 
-        border: '1px solid #e5e7eb', 
-        borderRadius: '8px', 
-        padding: '1.5rem', 
-        cursor: 'pointer',
-        background: 'white',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-        marginBottom: '1rem',
-        transition: 'transform 0.1s ease-in-out'
-      }}
+      class="border border-gray-200 rounded-lg p-4 cursor-pointer bg-white shadow-sm hover:shadow-md transition-shadow flex flex-col"
     >
-      <h3 style={{ margin: '0 0 0.5rem 0', color: '#111827' }}>{org.name}</h3>
-      <p style={{ margin: 0, color: '#6b7280', fontSize: '0.9rem' }}>
-        {org.modules.length} active module{org.modules.length !== 1 ? 's' : ''}
-      </p>
+      <div class="flex items-start justify-between mb-2">
+        <div class="flex-1 pr-2">
+          <h3 class="m-0 text-lg font-bold text-gray-900">{org.name}</h3>
+          {truncatedDesc && (
+            <p class="m-0 text-sm text-gray-600 mt-1 line-clamp-2">{truncatedDesc}</p>
+          )}
+        </div>
+        <div class="text-2xl flex-shrink-0">{flag}</div>
+      </div>
+      <div class="flex items-center justify-between text-sm text-gray-500 mt-auto">
+        <span>{countryName}</span>
+        <span>{org.modules.length} module{org.modules.length !== 1 ? 's' : ''}</span>
+      </div>
     </div>
   );
 }

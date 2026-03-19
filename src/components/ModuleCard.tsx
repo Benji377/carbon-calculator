@@ -22,9 +22,12 @@ export function ModuleCard({ moduleInstance, country, onEdit, onDelete }: Props)
       
       {/* Header & Total CO2 */}
       <div class="flex justify-between items-start mb-4">
-        <div>
-          <h3 class="m-0 mb-1 text-lg font-bold text-gray-900">{def.title}</h3>
-          <p class="m-0 text-gray-500 text-sm">{def.description}</p>
+        <div class="flex items-start gap-3">
+          <div class="text-3xl">{def.icon}</div>
+          <div>
+            <h3 class="m-0 mb-1 text-lg font-bold text-gray-900">{def.title}</h3>
+            <p class="m-0 text-gray-500 text-sm">{def.description}</p>
+          </div>
         </div>
         <div class="text-right">
           <div class="text-2xl font-bold text-red-600">
@@ -37,8 +40,8 @@ export function ModuleCard({ moduleInstance, country, onEdit, onDelete }: Props)
       {/* Values Display */}
       <div class="bg-gray-50 p-4 rounded-md">
         <div class={`flex justify-between ${def.submodules ? 'font-normal text-gray-600' : 'font-bold text-gray-800'}`}>
-          <span>Main Value:</span>
-          <span>{moduleInstance.value}</span>
+          <span>Value:</span>
+          <span>{moduleInstance.value} {def.unit}</span>
         </div>
         
         {/* Render Submodules if they exist */}
@@ -49,7 +52,7 @@ export function ModuleCard({ moduleInstance, country, onEdit, onDelete }: Props)
               {def.submodules.map(sub => (
                 <div key={sub.id} class="flex justify-between text-sm text-gray-500">
                   <span>{sub.title}</span>
-                  <span class="font-medium text-gray-700">{moduleInstance.submoduleValues?.[sub.id] || 0}</span>
+                  <span class="font-medium text-gray-700">{moduleInstance.submoduleValues?.[sub.id] || 0} {def.unit}</span>
                 </div>
               ))}
             </div>
