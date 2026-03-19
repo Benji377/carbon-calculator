@@ -30,3 +30,39 @@ export function selectOrganization(id: string | null) {
   activeOrgId.value = id;
   currentView.value = id ? "dashboard" : "orgs";
 }
+
+export function addModuleInstance(defId: string) {
+  const currentOrgId = activeOrgId.value;
+  if (!currentOrgId) return;
+
+  // We update the signal immutably so the UI knows to re-render
+  organizations.value = organizations.value.map(org => {
+    if (org.id === currentOrgId) {
+      return {
+        ...org,
+        modules: [
+          ...org.modules,
+          { id: crypto.randomUUID(), defId, value: 0, submoduleValues: {} }
+        ]
+      };
+    }
+    return org;
+  });
+}
+
+export function updateModuleValue(moduleId: string, newValue: number) {
+  const currentOrgId = activeOrgId.value;
+  if (!currentOrgId) return;
+
+  organizations.value = organizations.value.map(org => {
+    if (org.id === currentOrgId) {
+      return {
+        ...org,
+        modules: org.modules.map(mod => 
+          mod.id === moduleId ? { ...mod, value: newValue } : mod
+        )
+      };
+    }
+    return org;
+  });
+}

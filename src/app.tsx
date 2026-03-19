@@ -1,4 +1,8 @@
-import { currentView, activeOrg, activeOrgId, selectOrganization } from './store';
+import { currentView, activeOrgId, selectOrganization } from './store';
+import { OrganizationsView } from './pages/OrganizationsView';
+import { DashboardView } from './pages/DashboardView';
+import { StatisticsView } from './pages/StatisticsView';
+import { SettingsView } from './pages/SettingsView';
 import './app.css';
 
 // A simple Navbar component
@@ -19,28 +23,6 @@ function Navbar() {
   );
 }
 
-// Placeholder for the Organizations List
-function OrganizationsView() {
-  return (
-    <div style={{ padding: '2rem' }}>
-      <h2>Your Organizations</h2>
-      <p>List of orgs will go here...</p>
-      {/* We will build this next */}
-    </div>
-  );
-}
-
-// Placeholder for the Modules Dashboard
-function DashboardView() {
-  return (
-    <div style={{ padding: '2rem' }}>
-      <h2>{activeOrg.value?.name} - Dashboard</h2>
-      <p>Modules will go here...</p>
-      {/* We will build the module list and FAB here next */}
-    </div>
-  );
-}
-
 // Main App Router
 export function App() {
   return (
@@ -49,8 +31,8 @@ export function App() {
       <main>
         {currentView.value === 'orgs' && <OrganizationsView />}
         {currentView.value === 'dashboard' && <DashboardView />}
-        {currentView.value === 'settings' && <div style={{ padding: '2rem' }}>Settings Page (Import/Export goes here)</div>}
-        {currentView.value === 'stats' && <div style={{ padding: '2rem' }}>Statistics Page</div>}
+        {currentView.value === 'settings' && <SettingsView />}
+        {currentView.value === 'stats' && <StatisticsView />}
       </main>
     </div>
   );
