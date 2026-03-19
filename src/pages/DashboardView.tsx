@@ -1,4 +1,3 @@
-// src/pages/DashboardView.tsx
 import { useSignal, useComputed } from '@preact/signals';
 import { activeOrg, addModuleInstanceWithValues, updateModuleInstance, deleteModuleInstance } from '../store';
 import { MODULE_CATALOG } from '../data/moduleCatalog';
@@ -39,7 +38,10 @@ export function DashboardView() {
 
   return (
     <div class="p-4">
-      <h2 class="text-2xl font-bold mb-2">{org.name}</h2>
+      <h2 class="text-2xl font-bold mb-1">{org.name}</h2>
+      {org.description && (
+        <p class="text-gray-600 text-sm mb-6">{org.description}</p>
+      )}
       
       {/* Total CO2 Display */}
       <div class="mb-6 bg-gradient-to-r from-red-50 to-orange-50 p-6 rounded-lg border border-red-200">
@@ -50,9 +52,9 @@ export function DashboardView() {
       </div>
       
       {/* List Active Modules */}
-      <div class="mb-12">
+      <div class="mb-8">
         {org.modules.length === 0 ? (
-          <p class="text-gray-500">No modules added yet. Click the + button to add one.</p>
+          <p class="text-gray-500">No modules added yet. Click the button below to add one.</p>
         ) : (
           org.modules.map(modInstance => (
             <ModuleCard 
@@ -66,13 +68,15 @@ export function DashboardView() {
         )}
       </div>
 
-      {/* Floating Action Button */}
-      <button 
-        onClick={() => showAddModal.value = true}
-        class="fixed bottom-8 right-8 w-16 h-16 bg-green-700 text-white rounded-full shadow-lg hover:bg-green-800 transition-colors flex items-center justify-center text-2xl font-bold"
-      >
-        +
-      </button>
+      {/* Centered Add Module Button */}
+      <div class="flex justify-center py-8 border-t border-gray-200">
+        <button 
+          onClick={() => showAddModal.value = true}
+          class="px-8 py-3 bg-green-700 text-white font-bold rounded-lg hover:bg-green-800 transition-colors shadow-lg text-lg flex items-center gap-2"
+        >
+          ➕ Add Module
+        </button>
+      </div>
 
       {/* Modals */}
       {showAddModal.value && (

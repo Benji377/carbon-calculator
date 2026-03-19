@@ -28,17 +28,14 @@ export function OrganizationCard({ org, onClick }: Props) {
       onClick={onClick}
       class="border border-gray-200 rounded-lg p-4 cursor-pointer bg-white shadow-sm hover:shadow-md transition-shadow flex flex-col"
     >
-      <div class="flex items-start justify-between mb-2">
-        <div class="flex-1 pr-2">
-          <h3 class="m-0 text-lg font-bold text-gray-900">{org.name}</h3>
-          {truncatedDesc && (
-            <p class="m-0 text-sm text-gray-600 mt-1 line-clamp-2">{truncatedDesc}</p>
-          )}
-        </div>
-        <div class="text-2xl flex-shrink-0">{flag}</div>
+      <div class="flex-1">
+        <h3 class="m-0 text-lg font-bold text-gray-900">{org.name}</h3>
+        {truncatedDesc && (
+          <p class="m-0 text-sm text-gray-600 mt-1 line-clamp-2">{truncatedDesc}</p>
+        )}
       </div>
       <div class="flex items-center justify-between text-sm text-gray-500 mt-auto">
-        <span>{countryName}</span>
+        <span>{flag} {countryName}</span>
         <span>{org.modules.length} module{org.modules.length !== 1 ? 's' : ''}</span>
       </div>
     </div>

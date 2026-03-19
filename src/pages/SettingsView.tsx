@@ -1,4 +1,3 @@
-// src/pages/SettingsView.tsx
 import { currentLang, t } from '../i18n';
 import type { Language } from '../i18n';
 import { organizations } from '../store';
@@ -57,7 +56,7 @@ export function SettingsView() {
         <select 
           value={currentLang.value} 
           onChange={(e) => currentLang.value = (e.target as HTMLSelectElement).value as Language}
-          style={{ padding: '0.5rem', borderRadius: '4px', width: '100%', maxWidth: '300px' }}
+          style={{ padding: '0.5rem', borderRadius: '4px', width: '100%', maxWidth: '300px', border: '1px solid #d1d5db' }}
         >
           <option value="en">English</option>
           <option value="de">Deutsch</option>
@@ -84,7 +83,7 @@ export function SettingsView() {
           type="file" 
           accept=".json" 
           onChange={handleImport} 
-          style={{ display: 'block', marginTop: '1rem' }}
+          style={{ display: 'block', marginTop: '1rem', border: '1px solid #d1d5db', padding: '0.5rem', borderRadius: '4px' }}
         />
       </div>
 

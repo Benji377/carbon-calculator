@@ -1,4 +1,3 @@
-// src/i18n.ts
 import { signal, effect } from "@preact/signals";
 
 // Import your new JSON files

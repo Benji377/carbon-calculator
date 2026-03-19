@@ -5,6 +5,7 @@ import { StatisticsView } from './pages/StatisticsView';
 import { SettingsView } from './pages/SettingsView';
 import { AboutView } from './pages/AboutView';
 import { t } from './i18n';
+import logoPath from './assets/logo.png';
 
 function Navbar() {
   // A simple helper function to apply Tailwind classes based on the active view
@@ -23,7 +24,7 @@ function Navbar() {
         class="font-bold cursor-pointer flex items-center gap-2 text-lg hover:opacity-80 transition-opacity"
         onClick={() => selectOrganization(null)} // Clears active org and goes to 'orgs' view
       >
-        <img src="/logo.png" alt="Carbon Calculator" class="h-8 w-8" />
+        <img src={logoPath} alt="Carbon Calculator" class="h-8 w-8" />
         <span class="hidden sm:inline text-green-700">Carbon Calculator</span>
       </div>
 

@@ -1,4 +1,3 @@
-// src/pages/AboutView.tsx
 export function AboutView() {
   return (
     <div class="p-4 max-w-2xl mx-auto">

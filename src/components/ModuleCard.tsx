@@ -4,7 +4,7 @@ import type { CountryCode } from '../data/factors';
 
 interface Props {
   moduleInstance: ModuleInstance;
-  country: CountryCode; // We must pass this down from the active organization!
+  country: CountryCode;
   onEdit?: () => void;
   onDelete?: () => void;
 }
@@ -41,7 +41,12 @@ export function ModuleCard({ moduleInstance, country, onEdit, onDelete }: Props)
       <div class="bg-gray-50 p-4 rounded-md">
         <div class={`flex justify-between ${def.submodules ? 'font-normal text-gray-600' : 'font-bold text-gray-800'}`}>
           <span>Value:</span>
-          <span>{moduleInstance.value} {def.unit}</span>
+          <span>
+            {def.submodules && def.submodules.length > 0
+              ? `${Object.values(moduleInstance.submoduleValues || {}).reduce((sum, val) => sum + (val || 0), 0)} ${def.unit}`
+              : `${moduleInstance.value} ${def.unit}`
+            }
+          </span>
         </div>
         
         {/* Render Submodules if they exist */}

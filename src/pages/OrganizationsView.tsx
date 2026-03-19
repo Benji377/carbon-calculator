@@ -39,7 +39,7 @@ export function OrganizationsView() {
               />
               <button
                 onClick={() => deletingOrgId.value = org.id}
-                class="absolute bottom-2 right-2 p-2 text-red-600 hover:bg-red-50 rounded transition-colors"
+                class="absolute top-2 right-2 p-2 text-red-600 hover:bg-red-50 rounded transition-colors"
                 title="Delete organization"
               >
                 🗑️
