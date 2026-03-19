@@ -1,3 +1,9 @@
+[![test]](https://github.com/tfobz/carbon-calculator/actions/workflows/build.yml)
+[![deploy]](https://github.com/tfobz/carbon-calculator/actions/workflows/deploy.yml)
+
+[test]: https://img.shields.io/github/actions/workflow/status/tfobz/carbon-calculator/build.yml?label=Test&logo=githubactions&style=for-the-badge&labelColor=555555
+[deploy]: https://img.shields.io/github/actions/workflow/status/tfobz/carbon-calculator/deploy.yml?label=Deploy&logo=githubactions&style=for-the-badge&labelColor=555555
+
 # ♻️ Carbon Calculator
 
 A modern, responsive web application that helps organizations track and calculate their carbon dioxide (CO₂) emissions. Built with [Preact](https://preactjs.com/), [TypeScript](https://www.typescriptlang.org/), and [Tailwind CSS](https://tailwindcss.com/).
