@@ -1,5 +1,6 @@
 import { signal, computed, effect } from "@preact/signals";
-import type { Organization } from "./types";
+import type { Organization, ModuleInstance } from "./types";
+import type { CountryCode } from "./data/factors";
 
 // 1. Load from LocalStorage
 const savedData = localStorage.getItem("carbon-app-data");
@@ -21,8 +22,14 @@ export const activeOrg = computed(() =>
 );
 
 // 5. Actions
-export function addOrganization(name: string) {
-  const newOrg: Organization = { id: crypto.randomUUID(), name, modules: [] };
+export function addOrganization(name: string, description: string, country: CountryCode) {
+  const newOrg: Organization = { 
+    id: crypto.randomUUID(), 
+    name, 
+    description,
+    country, 
+    modules: [] 
+  };
   organizations.value = [...organizations.value, newOrg];
 }
 
@@ -61,6 +68,21 @@ export function updateModuleValue(moduleId: string, newValue: number) {
         modules: org.modules.map(mod => 
           mod.id === moduleId ? { ...mod, value: newValue } : mod
         )
+      };
+    }
+    return org;
+  });
+}
+
+export function updateModuleInstance(updatedModule: ModuleInstance) {
+  const currentOrgId = activeOrgId.value;
+  if (!currentOrgId) return;
+
+  organizations.value = organizations.value.map(org => {
+    if (org.id === currentOrgId) {
+      return {
+        ...org,
+        modules: org.modules.map(mod => mod.id === updatedModule.id ? updatedModule : mod)
       };
     }
     return org;

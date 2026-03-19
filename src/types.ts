@@ -1,3 +1,5 @@
+import type { CountryCode } from './data/factors';
+
 export interface SubmoduleDef {
   id: string;
   title: string;
@@ -10,7 +12,7 @@ export interface ModuleDef {
   description: string;
   submodules?: SubmoduleDef[];
   // The formula function that calculates CO2 based on the given value
-  calculateCO2: (value: number, submoduleValues?: Record<string, number>) => number;
+  calculateCO2: (value: number, submoduleValues: Record<string, number> | undefined, country: CountryCode) => number;
 }
 
 // How a user's entered data is saved
@@ -24,5 +26,7 @@ export interface ModuleInstance {
 export interface Organization {
   id: string;
   name: string;
+  description?: string;
+  country: CountryCode;
   modules: ModuleInstance[];
 }

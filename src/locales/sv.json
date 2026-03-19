@@ -1,0 +1,9 @@
+{
+    "settings": "Inställningar",
+    "language": "Språk",
+    "exportData": "Exportera Data",
+    "exportDesc": "Ladda ner en säkerhetskopia av alla dina organisationer och moduler.",
+    "importData": "Importera Data",
+    "importDesc": "Återställ dina data från en JSON-säkerhetskopia.",
+    "downloadBtn": "Ladda ner Backup"
+}

@@ -1,27 +1,62 @@
 import type { ModuleDef } from '../types';
+import { FACTORS } from './factors';
 
 export const MODULE_CATALOG: Record<string, ModuleDef> = {
   pizza: {
     id: 'pizza',
-    title: 'Dietary Impact',
-    description: 'Pizzas consumed per month',
-    calculateCO2: (value) => value * 2.5, // e.g., 2.5kg CO2 per pizza
+    title: 'Dietary Impact (Pizza)',
+    description: 'Pizzas consumed',
+    calculateCO2: (value, sub, country) => value * FACTORS[country].pizza,
+  },
+  computer: {
+    id: 'computer',
+    title: 'Workstations (Computers)',
+    description: 'Number of active computers',
+    calculateCO2: (value, sub, country) => value * FACTORS[country].computer,
+  },
+  mobility: {
+    id: 'mobility',
+    title: 'Mobility & Travel',
+    description: 'Distance traveled per transport type (km)',
+    submodules: [
+      { id: 'pkw', title: 'Car (PKW)' },
+      { id: 'bus', title: 'Intercity Bus' },
+      { id: 'train', title: 'Train' },
+      { id: 'city_bus', title: 'City Bus' }
+    ],
+    calculateCO2: (val, sub, country) => {
+      if (!sub) return 0;
+      const factors = FACTORS[country];
+      return (
+        (sub.pkw || 0) * factors.mobility_pkw +
+        (sub.bus || 0) * factors.mobility_bus +
+        (sub.train || 0) * factors.mobility_train +
+        (sub.city_bus || 0) * factors.mobility_city_bus
+      );
+    }
   },
   electricity: {
     id: 'electricity',
     title: 'Electricity Mix',
-    description: 'Monthly electricity usage (kWh)',
+    description: 'Energy consumed per source (kWh)',
     submodules: [
-      { id: 'wind', title: 'Wind Power (kWh)' },
-      { id: 'coal', title: 'Coal Power (kWh)' },
-      { id: 'nuclear', title: 'Nuclear Power (kWh)' }
+      { id: 'wind', title: 'Wind Power' },
+      { id: 'hydro', title: 'Hydro Power' },
+      { id: 'gas', title: 'Natural Gas' },
+      { id: 'oil', title: 'Oil' },
+      { id: 'coal', title: 'Coal' }
     ],
-    calculateCO2: (totalKwh, subVals) => {
-      if (!subVals) return totalKwh * 0.5; // fallback average
-      const windCO2 = (subVals.wind || 0) * 0.01;
-      const coalCO2 = (subVals.coal || 0) * 1.0;
-      const nuclearCO2 = (subVals.nuclear || 0) * 0.05;
-      return windCO2 + coalCO2 + nuclearCO2;
+    calculateCO2: (val, sub, country) => {
+      if (!sub) return 0;
+      const factors = FACTORS[country];
+      return (
+        (sub.wind || 0) * factors.electricity_wind +
+        (sub.hydro || 0) * factors.electricity_hydro +
+        (sub.gas || 0) * factors.electricity_gas +
+        (sub.oil || 0) * factors.electricity_oil +
+        (sub.coal || 0) * factors.electricity_coal
+      );
     }
   }
+  // You can easily add 'water', 'toner', etc. using the exact same 1-line formula as 'pizza'!
 };

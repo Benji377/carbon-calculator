@@ -1,0 +1,9 @@
+{
+    "settings": "Impostazioni",
+    "language": "Lingua",
+    "exportData": "Esporta Dati",
+    "exportDesc": "Scarica un backup di tutte le tue organizzazioni e moduli.",
+    "importData": "Importa Dati",
+    "importDesc": "Ripristina i tuoi dati da un file di backup JSON.",
+    "downloadBtn": "Scarica Backup"
+}

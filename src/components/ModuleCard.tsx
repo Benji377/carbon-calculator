@@ -1,68 +1,76 @@
-// src/components/ModuleCard.tsx
 import type { ModuleInstance } from '../types';
 import { MODULE_CATALOG } from '../data/moduleCatalog';
+import type { CountryCode } from '../data/factors';
 
 interface Props {
   moduleInstance: ModuleInstance;
+  country: CountryCode; // We must pass this down from the active organization!
   onEdit?: () => void;
   onDelete?: () => void;
 }
 
-export function ModuleCard({ moduleInstance, onEdit, onDelete }: Props) {
+export function ModuleCard({ moduleInstance, country, onEdit, onDelete }: Props) {
   // Look up the definition to get the title, description, and formula
   const def = MODULE_CATALOG[moduleInstance.defId];
-  if (!def) return null; // Safety check in case a module is removed from catalog
+  if (!def) return null; // Safety check in case a module is removed from the catalog
 
-  // Calculate the total CO2 for this specific card
-  const co2 = def.calculateCO2(moduleInstance.value, moduleInstance.submoduleValues);
+  // Calculate the total CO2 for this specific card, injecting the country factor
+  const co2 = def.calculateCO2(moduleInstance.value, moduleInstance.submoduleValues, country);
 
   return (
-    <div style={{ 
-      border: '1px solid #e5e7eb', 
-      borderRadius: '8px', 
-      padding: '1.5rem', 
-      background: 'white',
-      boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-      marginBottom: '1rem'
-    }}>
+    <div class="border border-gray-200 rounded-lg p-6 bg-white shadow-sm mb-4 transition-shadow hover:shadow-md">
+      
       {/* Header & Total CO2 */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
+      <div class="flex justify-between items-start mb-4">
         <div>
-          <h3 style={{ margin: '0 0 0.25rem 0' }}>{def.title}</h3>
-          <p style={{ margin: 0, color: '#6b7280', fontSize: '0.9rem' }}>{def.description}</p>
+          <h3 class="m-0 mb-1 text-lg font-bold text-gray-900">{def.title}</h3>
+          <p class="m-0 text-gray-500 text-sm">{def.description}</p>
         </div>
-        <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#e11d48' }}>
-            {co2.toLocaleString()} kg
+        <div class="text-right">
+          <div class="text-2xl font-bold text-red-600">
+            {/* Added rounding so we don't get crazy long decimals like 14.000000001 */}
+            {co2.toLocaleString(undefined, { maximumFractionDigits: 2 })} kg
           </div>
         </div>
       </div>
 
       {/* Values Display */}
-      <div style={{ background: '#f9fafb', padding: '1rem', borderRadius: '6px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: def.submodules ? 'normal' : 'bold' }}>
+      <div class="bg-gray-50 p-4 rounded-md">
+        <div class={`flex justify-between ${def.submodules ? 'font-normal text-gray-600' : 'font-bold text-gray-800'}`}>
           <span>Main Value:</span>
           <span>{moduleInstance.value}</span>
         </div>
         
         {/* Render Submodules if they exist */}
         {def.submodules && def.submodules.length > 0 && (
-          <div style={{ borderTop: '1px solid #e5e7eb', paddingTop: '0.5rem', marginTop: '0.5rem' }}>
-            <p style={{ margin: '0 0 0.5rem 0', fontSize: '0.85rem', fontWeight: 'bold', color: '#4b5563' }}>Breakdown:</p>
-            {def.submodules.map(sub => (
-              <div key={sub.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', color: '#6b7280', marginBottom: '0.25rem' }}>
-                <span>{sub.title}</span>
-                <span>{moduleInstance.submoduleValues?.[sub.id] || 0}</span>
-              </div>
-            ))}
+          <div class="border-t border-gray-200 pt-3 mt-3">
+            <p class="m-0 mb-2 text-sm font-bold text-gray-600">Breakdown:</p>
+            <div class="space-y-1">
+              {def.submodules.map(sub => (
+                <div key={sub.id} class="flex justify-between text-sm text-gray-500">
+                  <span>{sub.title}</span>
+                  <span class="font-medium text-gray-700">{moduleInstance.submoduleValues?.[sub.id] || 0}</span>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
 
       {/* Action Buttons */}
-      <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem', justifyContent: 'flex-end' }}>
-        <button onClick={onEdit} style={{ padding: '0.4rem 1rem', cursor: 'pointer' }}>Edit</button>
-        <button onClick={onDelete} style={{ padding: '0.4rem 1rem', cursor: 'pointer', color: '#dc2626', background: 'transparent', border: '1px solid #dc2626' }}>Delete</button>
+      <div class="flex gap-2 mt-5 justify-end">
+        <button 
+          onClick={onEdit} 
+          class="px-4 py-1.5 cursor-pointer rounded text-gray-700 hover:bg-gray-100 font-medium transition-colors"
+        >
+          Edit
+        </button>
+        <button 
+          onClick={onDelete} 
+          class="px-4 py-1.5 cursor-pointer text-red-600 bg-transparent border border-red-600 rounded hover:bg-red-50 font-medium transition-colors"
+        >
+          Delete
+        </button>
       </div>
     </div>
   );

@@ -1,0 +1,9 @@
+{
+    "settings": "Configuración",
+    "language": "Idioma",
+    "exportData": "Exportar Datos",
+    "exportDesc": "Descarga una copia de seguridad de todas tus organizaciones y módulos.",
+    "importData": "Importar Datos",
+    "importDesc": "Restaura tus datos desde un archivo de copia de seguridad JSON.",
+    "downloadBtn": "Descargar Copia"
+}

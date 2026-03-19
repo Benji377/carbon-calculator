@@ -1,0 +1,9 @@
+{
+  "settings": "Settings",
+  "language": "Language",
+  "exportData": "Export Data",
+  "exportDesc": "Download a backup of all your organizations and modules.",
+  "importData": "Import Data",
+  "importDesc": "Restore your data from a JSON backup file.",
+  "downloadBtn": "Download Backup"
+}
