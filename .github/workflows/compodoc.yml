@@ -39,7 +39,7 @@ jobs:
       - name: Build doc
         run: npm run compodoc
       - name: Archive www Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: documentation
           path: documentation
