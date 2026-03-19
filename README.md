@@ -1,54 +1,143 @@
-# Carbon Calculator
-![Documentation Coverage](https://github.com/Chris3444/carbon-calculator/blob/master/documentation/images/coverage-badge-documentation.svg)
-![Lines of code](https://img.shields.io/tokei/lines/github/tfobz/carbon-calculator?label=Lines%20of%20code)
+# ♻️ Carbon Calculator
 
-# Table of contents
+A modern, responsive web application that helps organizations track and calculate their carbon dioxide (CO₂) emissions. Built with [Preact](https://preactjs.com/), [TypeScript](https://www.typescriptlang.org/), and [Tailwind CSS](https://tailwindcss.com/).
 
-- [Setup this project:](#setup-this-project)
-  - [- Development server](#--development-server)
-  - [- Code scaffolding](#--code-scaffolding)
-  - [- Build](#--build)
-  - [- Running unit tests](#--running-unit-tests)
-  - [- Running end-to-end tests](#--running-end-to-end-tests)
-  - [- Deploy github-pages](#--deploy-github-pages)
-- [Documentation](#documentation)
-- [Features added since the last version:](#features-added-since-the-last-version)
-- [Further help](#further-help)
+## 📋 About
 
-## Setup this project:
+Carbon Calculator is an open-source Progressive Web App (PWA) designed to make carbon footprint tracking accessible and intuitive. Organizations can:
 
-### - Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-### - Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-### - Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-### - Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-### - Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-### - Deploy github-pages
-Run `npm run deploy` to execute the deploy for Github-pages.
+- **Track multiple organizations** with different countries and emission factors
+- **Add modular consumption data** for various categories (food, energy, transport, equipment, etc.)
+- **Calculate CO₂ emissions** based on country-specific emission factors
+- **Compare emissions** between organizations with visual charts and analytics
+- **Export and import data** for backup and sharing
+- **Work offline** thanks to PWA technology
+- **Use multiple languages** (English, German, Italian, Spanish, Swedish)
 
 
-## Documentation
+## 🚀 Quick Start
 
-The documentation has been created using [Compodoc](https://compodoc.app/), a powerful open-source tool to automatically generate
-html documentation from comments in the Angular project. \
-You can create your own HTML documentation using the command `npm run compodoc` and you will find the index.html file in the documentation folder. \
-WARNING! Here on Github the documentation is auto-generated on every commit and has its [own branch](https://github.com/Benji377/carbon-calculator/tree/angular-docu) \
-Also, make sure you follow the [Guidelines](DOCUMENTING.md)!
+### Prerequisites
 
-## Further help
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.6. \
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- [Node.js](https://nodejs.org/) 20.0 or higher
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/carbon-calculator.git
+cd carbon-calculator
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+### Development
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+The app will open at `http://localhost:5173/`
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+This creates an optimized production build in the `dist/` directory.
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+
+## 📦 Project Structure
+
+```
+carbon-calculator/
+├── src/
+│   ├── components/          # Reusable UI components
+│   ├── pages/              # Page views (Dashboard, Settings, etc.)
+│   ├── data/
+│   │   ├── factors/        # Country-specific emission factors (JSON)
+│   │   ├── moduleCatalog.ts # Module definitions
+│   │   └── factors.ts      # Factor loading
+│   ├── locales/            # Translation files (i18n)
+│   ├── app.tsx             # Root component
+│   ├── store.ts            # State management (Preact Signals)
+│   ├── types.ts            # TypeScript type definitions
+│   └── main.tsx            # Entry point
+├── public/                 # Static assets
+├── package.json
+├── vite.config.ts
+└── tsconfig.json
+```
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Preact](https://preactjs.com/) - Fast 3kB React alternative
+- **State Management**: [@preact/signals](https://preactjs.com/guide/v10/signals/) - Fine-grained reactivity
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
+- **Build Tool**: [Vite](https://vitejs.dev/) - Lightning fast build tool
+- **PWA**: [vite-plugin-pwa](https://vite-pwa-org.netlify.app/) - PWA support
+- **Charts**: [Recharts](https://recharts.org/) - React charting library
+- **Language**: [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
+
+## 🌍 Supported Countries & Languages
+
+### Countries (Emission Factors)
+- 🇦🇹 Austria
+- 🇮🇹 Italy
+- 🇪🇸 Spain
+- 🇸🇪 Sweden
+
+### Languages
+- 🇬🇧 English
+- 🇩🇪 Deutsch
+- 🇮🇹 Italiano
+- 🇪🇸 Español
+- 🇸🇪 Svenska
+
+## 📱 PWA Features
+
+The app can be installed on any device as a Progressive Web App:
+
+- **Installable** on desktop, iOS, and Android
+- **Offline Support** - Works without internet connection
+- **App-like Experience** - Full-screen, native feel
+- **Fast Performance** - Pre-cached assets, instant load times
+
+## 📊 Emission Factors
+
+Emission factors are customizable per country and stored in JSON format. Currently supported:
+
+- Pizza/Food consumption
+- Coffee and beverages
+- Paper usage
+- Technology (computers, laptops, servers, printers)
+- Mobility/Transportation
+- Electricity by source
+- Water usage
+- Heating
+- And more...
+
+## 🤝 Contributing
+
+This project was developed as part of the Erasmus+ program. We welcome contributions!
+
+## 📄 License
+
+[MIT](/LICENSE)
+
+## 🙋 Support
+
+For issues, questions, or suggestions, please open an issue on GitHub.
