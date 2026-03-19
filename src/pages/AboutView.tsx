@@ -1,63 +1,65 @@
+import { t } from '../i18n';
+import logoPath from '../assets/erasmus_logo.jpg';
+
 export function AboutView() {
   return (
-    <div class="p-4 max-w-2xl mx-auto">
+    <div class="max-w-2xl mx-auto">
       <div class="mb-8">
-        <h2 class="text-3xl font-bold mb-4 text-green-700">Carbon Calculator</h2>
-        <p class="text-gray-700 text-lg mb-4">
-          An open-source web application that helps organizations calculate and track their carbon dioxide (CO₂) emissions. 
-          The app allows you to manually add consumptions in a modular way and get a calculated CO₂ emissions footprint.
+        <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-green-700">{t('aboutTitle')}</h2>
+        <p class="text-gray-700 text-sm sm:text-base leading-relaxed mb-4">
+          {t('aboutDescription')}
         </p>
-        <p class="text-gray-600">
-          This project is designed to be simple, modular, and easy to maintain while providing visual insights into your organization's environmental impact.
+        <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+          {t('aboutDescriptionExtra')}
         </p>
       </div>
 
-      <div class="mb-8 bg-white p-6 rounded-lg border border-gray-200">
-        <h3 class="text-xl font-bold mb-4 text-gray-900">Features</h3>
-        <ul class="space-y-2 text-gray-700">
+      <div class="mb-8 bg-white p-4 sm:p-6 rounded-lg border border-gray-200">
+        <h3 class="text-lg sm:text-xl font-bold mb-4 text-gray-900">{t('features')}</h3>
+        <ul class="space-y-2 text-gray-700 text-sm sm:text-base">
           <li class="flex items-start gap-2">
-            <span class="text-green-600 font-bold">✓</span>
-            <span>Track multiple organizations</span>
+            <span class="text-green-600 font-bold flex-shrink-0">✓</span>
+            <span>{t('featureTrack')}</span>
           </li>
           <li class="flex items-start gap-2">
-            <span class="text-green-600 font-bold">✓</span>
-            <span>Add modular consumption data</span>
+            <span class="text-green-600 font-bold flex-shrink-0">✓</span>
+            <span>{t('featureAdd')}</span>
           </li>
           <li class="flex items-start gap-2">
-            <span class="text-green-600 font-bold">✓</span>
-            <span>Calculate CO₂ emissions based on country factors</span>
+            <span class="text-green-600 font-bold flex-shrink-0">✓</span>
+            <span>{t('featureCalculate')}</span>
           </li>
           <li class="flex items-start gap-2">
-            <span class="text-green-600 font-bold">✓</span>
-            <span>Compare emissions between organizations</span>
+            <span class="text-green-600 font-bold flex-shrink-0">✓</span>
+            <span>{t('featureCompare')}</span>
           </li>
           <li class="flex items-start gap-2">
-            <span class="text-green-600 font-bold">✓</span>
-            <span>Multi-language support (English, German, Italian, Spanish, Swedish)</span>
+            <span class="text-green-600 font-bold flex-shrink-0">✓</span>
+            <span>{t('featureLanguages')}</span>
           </li>
           <li class="flex items-start gap-2">
-            <span class="text-green-600 font-bold">✓</span>
-            <span>Offline-first Progressive Web App (PWA)</span>
+            <span class="text-green-600 font-bold flex-shrink-0">✓</span>
+            <span>{t('featurePWA')}</span>
           </li>
           <li class="flex items-start gap-2">
-            <span class="text-green-600 font-bold">✓</span>
-            <span>Export and import data</span>
+            <span class="text-green-600 font-bold flex-shrink-0">✓</span>
+            <span>{t('featureExportImport')}</span>
           </li>
         </ul>
       </div>
 
-      <div class="mb-8 bg-white p-6 rounded-lg border border-gray-200">
-        <h3 class="text-xl font-bold mb-4 text-gray-900">Contributors</h3>
-        <p class="text-gray-600 mb-4">This project was developed as part of the Erasmus+ program.</p>
-        <p class="text-gray-600">
-          We acknowledge the contribution of all developers, designers, and stakeholders who made this project possible.
+      <div class="mb-8 bg-white p-4 sm:p-6 rounded-lg border border-gray-200">
+        <h3 class="text-lg sm:text-xl font-bold mb-4 text-gray-900">{t('contributors')}</h3>
+        <p class="text-gray-600 mb-4 text-sm sm:text-base">{t('contributorsDesc')}</p>
+        <p class="text-gray-600 text-sm sm:text-base">
+          {t('contributorsAck')}
         </p>
       </div>
 
-      <div class="bg-white p-6 rounded-lg border border-gray-200 text-center">
-        <h3 class="text-lg font-bold mb-4 text-gray-900">Supported by</h3>
+      <div class="bg-white p-4 sm:p-6 rounded-lg border border-gray-200 text-center">
+        <h3 class="text-base sm:text-lg font-bold mb-4 text-gray-900">{t('supportedBy')}</h3>
         <img 
-          src="/erasmus_logo.jpg" 
+          src={logoPath} 
           alt="Erasmus+ Logo" 
           class="h-20 mx-auto"
         />

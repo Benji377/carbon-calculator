@@ -63,15 +63,17 @@ function Navbar() {
 }
 
 function Footer() {
+  const currentYear = new Date().getFullYear();
+  
   return (
     <footer class="bg-gray-100 border-t border-gray-200 mt-12 py-6">
-      <div class="max-w-4xl mx-auto px-4 flex justify-between items-center text-sm text-gray-600">
-        <p class="m-0">&copy; 2026 Carbon Calculator. All rights reserved.</p>
+      <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center text-xs sm:text-sm text-gray-600 gap-4 text-center sm:text-left">
+        <p class="m-0">© {currentYear} {t('copyright')}</p>
         <button 
           onClick={() => currentView.value = 'about'}
           class="text-green-700 hover:text-green-900 font-medium transition-colors"
         >
-          About
+          {t('about')}
         </button>
       </div>
     </footer>

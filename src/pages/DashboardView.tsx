@@ -5,6 +5,7 @@ import { ModuleCard } from '../components/ModuleCard';
 import { AddModuleModal } from '../components/AddModuleModal';
 import { EditModuleModal } from '../components/EditModuleModal';
 import { ConfirmationModal } from '../components/ConfirmationModal';
+import { t } from '../i18n';
 
 export function DashboardView() {
   const showAddModal = useSignal(false);
@@ -12,7 +13,7 @@ export function DashboardView() {
   const deletingModule = useSignal<string | null>(null);
 
   const org = activeOrg.value;
-  if (!org) return <p class="text-gray-500 p-4">No organization selected.</p>;
+  if (!org) return <p class="text-gray-500 p-4">{t('noOrganizationsMsg')}</p>;
 
   // Calculate total CO2
   const totalCO2 = useComputed(() => {
@@ -37,16 +38,16 @@ export function DashboardView() {
   const editModule = org.modules.find(m => m.id === editingModule.value);
 
   return (
-    <div class="p-4">
-      <h2 class="text-2xl font-bold mb-1">{org.name}</h2>
+    <div>
+      <h2 class="text-2xl sm:text-3xl font-bold mb-1">{org.name}</h2>
       {org.description && (
-        <p class="text-gray-600 text-sm mb-6">{org.description}</p>
+        <p class="text-gray-600 text-xs sm:text-sm mb-6">{org.description}</p>
       )}
       
       {/* Total CO2 Display */}
-      <div class="mb-6 bg-gradient-to-r from-red-50 to-orange-50 p-6 rounded-lg border border-red-200">
-        <p class="text-gray-600 text-sm mb-1">Total CO2 Emissions</p>
-        <h3 class="text-4xl font-bold text-red-600 m-0">
+      <div class="mb-6 bg-gradient-to-r from-red-50 to-orange-50 p-4 sm:p-6 rounded-lg border border-red-200 mx-auto">
+        <p class="text-gray-600 text-xs sm:text-sm mb-1">{t('totalCO2')}</p>
+        <h3 class="text-2xl sm:text-4xl font-bold text-red-600 m-0">
           {totalCO2.value.toLocaleString(undefined, { maximumFractionDigits: 2 })} kg CO₂
         </h3>
       </div>
@@ -54,7 +55,7 @@ export function DashboardView() {
       {/* List Active Modules */}
       <div class="mb-8">
         {org.modules.length === 0 ? (
-          <p class="text-gray-500">No modules added yet. Click the button below to add one.</p>
+          <p class="text-gray-500 text-sm">{t('noModulesMsg')}</p>
         ) : (
           org.modules.map(modInstance => (
             <ModuleCard 
@@ -69,12 +70,12 @@ export function DashboardView() {
       </div>
 
       {/* Centered Add Module Button */}
-      <div class="flex justify-center py-8 border-t border-gray-200">
+      <div class="flex justify-center py-6 sm:py-8 border-t border-gray-200">
         <button 
           onClick={() => showAddModal.value = true}
-          class="px-8 py-3 bg-green-700 text-white font-bold rounded-lg hover:bg-green-800 transition-colors shadow-lg text-lg flex items-center gap-2"
+          class="px-6 sm:px-8 py-2 sm:py-3 bg-green-700 text-white font-bold rounded-lg hover:bg-green-800 transition-colors shadow-lg text-sm sm:text-lg flex items-center gap-2"
         >
-          ➕ Add Module
+          ➕ {t('addModuleBtn')}
         </button>
       </div>
 
@@ -99,10 +100,10 @@ export function DashboardView() {
 
       {deletingModule.value && (
         <ConfirmationModal 
-          title="Delete Module"
-          message="Are you sure you want to delete this module? This action cannot be undone."
-          confirmText="Delete"
-          cancelText="Cancel"
+          title={t('deleteModule')}
+          message={t('deleteModuleConfirm')}
+          confirmText={t('delete')}
+          cancelText={t('cancel')}
           isDelete={true}
           onConfirm={handleDeleteModule}
           onCancel={() => deletingModule.value = null}

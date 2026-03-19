@@ -2,6 +2,7 @@ import { useSignal, useComputed } from '@preact/signals';
 import { organizations } from '../store';
 import { MODULE_CATALOG } from '../data/moduleCatalog';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, CartesianGrid } from 'recharts';
+import { t } from '../i18n';
 
 export function StatisticsView() {
   // 1. Local UI State for comparisons
@@ -49,54 +50,54 @@ export function StatisticsView() {
   });
 
   return (
-    <div style={{ padding: '1rem' }}>
-      <h2 class="text-3xl font-bold mb-8 text-gray-900">📈 Analytics & Comparison</h2>
+    <div class="p-4">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gray-900">{t('analyticsComparison')}</h2>
 
       {/* --- CONTROL PANEL --- */}
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', background: '#f9fafb', padding: '1rem', borderRadius: '8px', border: '1px solid #e5e7eb' }}>
-        <div style={{ flex: 1 }}>
-          <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '0.5rem', color: '#4b5563' }}>Baseline Organization</label>
-          <select value={compareOrg1.value} onChange={(e) => compareOrg1.value = (e.target as HTMLSelectElement).value} style={{ width: '100%', padding: '0.5rem', borderRadius: '4px' }}>
-            <option value="">Select an organization...</option>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 sm:mb-8 bg-gray-50 p-3 sm:p-4 rounded-lg border border-gray-200">
+        <div>
+          <label class="block text-xs sm:text-sm font-bold mb-2 text-gray-700">{t('baselineOrganization')}</label>
+          <select value={compareOrg1.value} onChange={(e) => compareOrg1.value = (e.target as HTMLSelectElement).value} class="w-full p-2 border border-gray-300 rounded text-sm">
+            <option value="">{t('selectOrganization')}</option>
             {organizations.value.map(org => <option key={org.id} value={org.id}>{org.name}</option>)}
           </select>
         </div>
-        <div style={{ flex: 1 }}>
-          <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '0.5rem', color: '#4b5563' }}>Compare With</label>
-          <select value={compareOrg2.value} onChange={(e) => compareOrg2.value = (e.target as HTMLSelectElement).value} style={{ width: '100%', padding: '0.5rem', borderRadius: '4px' }}>
-            <option value="">None (Single View)</option>
+        <div>
+          <label class="block text-xs sm:text-sm font-bold mb-2 text-gray-700">{t('compareWith')}</label>
+          <select value={compareOrg2.value} onChange={(e) => compareOrg2.value = (e.target as HTMLSelectElement).value} class="w-full p-2 border border-gray-300 rounded text-sm">
+            <option value="">{t('singleView')}</option>
             {organizations.value.map(org => <option key={org.id} value={org.id}>{org.name}</option>)}
           </select>
         </div>
       </div>
 
       {/* --- KPI INDICATORS --- */}
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>
-        <div style={{ flex: 1, padding: '1.5rem', background: '#eff6ff', borderLeft: '4px solid #3b82f6', borderRadius: '0 8px 8px 0' }}>
-          <p style={{ margin: 0, color: '#1d4ed8', fontWeight: 'bold' }}>Baseline Total CO2</p>
-          <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '2rem', color: '#1e3a8a' }}>{total1.value.toLocaleString()} kg</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 sm:mb-8">
+        <div class="p-4 sm:p-6 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+          <p class="m-0 text-xs sm:text-sm text-blue-700 font-bold">{t('baselineTotalCO2')}</p>
+          <h3 class="m-0 mt-2 text-lg sm:text-2xl text-blue-900 font-bold">{total1.value.toLocaleString()} kg</h3>
         </div>
         
         {compareOrg2.value && (
-          <div style={{ flex: 1, padding: '1.5rem', background: '#fdf4ff', borderLeft: '4px solid #d946ef', borderRadius: '0 8px 8px 0' }}>
-            <p style={{ margin: 0, color: '#a21caf', fontWeight: 'bold' }}>Comparison Total CO2</p>
-            <h3 style={{ margin: '0.5rem 0 0 0', fontSize: '2rem', color: '#701a75' }}>{total2.value.toLocaleString()} kg</h3>
+          <div class="p-4 sm:p-6 bg-purple-50 border-l-4 border-purple-500 rounded-r-lg">
+            <p class="m-0 text-xs sm:text-sm text-purple-700 font-bold">{t('comparisonTotalCO2')}</p>
+            <h3 class="m-0 mt-2 text-lg sm:text-2xl text-purple-900 font-bold">{total2.value.toLocaleString()} kg</h3>
           </div>
         )}
       </div>
 
       {/* --- COLORFUL DIAGRAM (Recharts) --- */}
-      <div style={{ height: '400px', marginBottom: '3rem', background: 'white', padding: '1rem', border: '1px solid #e5e7eb', borderRadius: '8px' }}>
-        <h3 style={{ marginTop: 0, marginBottom: '1.5rem', fontSize: '1.1rem' }}>Emissions by Module Type</h3>
+      <div class="h-64 sm:h-96 mb-6 sm:mb-8 bg-white p-3 sm:p-4 border border-gray-200 rounded-lg overflow-x-auto">
+        <h3 class="mt-0 mb-3 sm:mb-4 text-sm sm:text-base font-bold">{t('emissionsByModule')}</h3>
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chartData.value} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+          <BarChart data={chartData.value} margin={{ top: 5, right: 10, left: 10, bottom: 40 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
-            <XAxis dataKey="name" axisLine={false} tickLine={false} />
-            <YAxis axisLine={false} tickLine={false} />
+            <XAxis dataKey="name" axisLine={false} tickLine={false} angle={-45} textAnchor="end" height={80} tick={{ fontSize: 12 }} />
+            <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12 }} />
             <Tooltip cursor={{ fill: '#f3f4f6' }} />
-            <Legend />
-            <Bar dataKey="org1" name="Baseline Org" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-            {compareOrg2.value && <Bar dataKey="org2" name="Comparison Org" fill="#d946ef" radius={[4, 4, 0, 0]} />}
+            <Legend wrapperStyle={{ fontSize: '12px' }} />
+            <Bar dataKey="org1" name={t('baselineOrg')} fill="#3b82f6" radius={[4, 4, 0, 0]} />
+            {compareOrg2.value && <Bar dataKey="org2" name={t('comparisonOrg')} fill="#d946ef" radius={[4, 4, 0, 0]} />}
           </BarChart>
         </ResponsiveContainer>
       </div>

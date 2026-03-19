@@ -47,16 +47,16 @@ export function SettingsView() {
   };
 
   return (
-    <div style={{ padding: '1rem' }}>
-      <h2 class="text-3xl font-bold mb-8 text-gray-900">⚙️ {t('settings')}</h2>
+    <div>
+      <h2 class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gray-900">⚙️ {t('settings')}</h2>
 
       {/* --- LANGUAGE SELECTOR --- */}
-      <div style={{ marginBottom: '2rem', padding: '1.5rem', border: '1px solid #e5e7eb', borderRadius: '8px', background: 'white' }}>
-        <h3 style={{ marginTop: 0 }}>{t('language')}</h3>
+      <div class="mb-6 sm:mb-8 p-4 sm:p-6 border border-gray-200 rounded-lg bg-white mx-4">
+        <h3 class="mt-0 mb-4 text-base sm:text-lg font-bold">{t('language')}</h3>
         <select 
           value={currentLang.value} 
           onChange={(e) => currentLang.value = (e.target as HTMLSelectElement).value as Language}
-          style={{ padding: '0.5rem', borderRadius: '4px', width: '100%', maxWidth: '300px', border: '1px solid #d1d5db' }}
+          class="w-full sm:max-w-xs p-2 border border-gray-300 rounded text-sm"
         >
           <option value="en">English</option>
           <option value="de">Deutsch</option>
@@ -67,23 +67,23 @@ export function SettingsView() {
       </div>
 
       {/* --- EXPORT DATA --- */}
-      <div style={{ marginBottom: '2rem', padding: '1.5rem', border: '1px solid #e5e7eb', borderRadius: '8px', background: 'white' }}>
-        <h3 style={{ marginTop: 0 }}>{t('exportData')}</h3>
-        <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>{t('exportDesc')}</p>
-        <button onClick={handleExport} style={{ padding: '0.75rem 1.5rem', borderRadius: '4px', cursor: 'pointer', background: '#111827', color: 'white', border: 'none' }}>
+      <div class="mb-6 sm:mb-8 p-4 sm:p-6 border border-gray-200 rounded-lg bg-white mx-4">
+        <h3 class="mt-0 mb-4 text-base sm:text-lg font-bold">{t('exportData')}</h3>
+        <p class="text-gray-600 text-xs sm:text-sm mb-4">{t('exportDesc')}</p>
+        <button onClick={handleExport} class="px-4 py-2 rounded text-white bg-gray-800 hover:bg-gray-900 font-medium text-sm">
           {t('downloadBtn')}
         </button>
       </div>
 
       {/* --- IMPORT DATA --- */}
-      <div style={{ padding: '1.5rem', border: '1px solid #e5e7eb', borderRadius: '8px', background: 'white' }}>
-        <h3 style={{ marginTop: 0 }}>{t('importData')}</h3>
-        <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>{t('importDesc')}</p>
+      <div class="p-4 sm:p-6 border border-gray-200 rounded-lg bg-white mx-4">
+        <h3 class="mt-0 mb-4 text-base sm:text-lg font-bold">{t('importData')}</h3>
+        <p class="text-gray-600 text-xs sm:text-sm mb-4">{t('importDesc')}</p>
         <input 
           type="file" 
           accept=".json" 
           onChange={handleImport} 
-          style={{ display: 'block', marginTop: '1rem', border: '1px solid #d1d5db', padding: '0.5rem', borderRadius: '4px' }}
+          class="block w-full text-xs sm:text-sm border border-gray-300 p-2 rounded"
         />
       </div>
 

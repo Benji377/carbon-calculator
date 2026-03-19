@@ -4,6 +4,7 @@ import { OrganizationCard } from '../components/OrganizationCard';
 import { AddOrganizationModal } from '../components/AddOrganizationModal';
 import { ConfirmationModal } from '../components/ConfirmationModal';
 import type { CountryCode } from '../data/factors';
+import { t } from '../i18n';
 
 export function OrganizationsView() {
   const showAddModal = useSignal(false);
@@ -22,15 +23,15 @@ export function OrganizationsView() {
   };
 
   return (
-    <div class="p-4">
-      <h2 class="text-3xl font-bold mb-8 text-gray-900">🏢 Your Organizations</h2>
+    <div>
+      <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-gray-900">🏢 {t('yourOrganizations')}</h2>
       
       {organizations.value.length === 0 ? (
         <div class="text-center py-12">
-          <p class="text-gray-500 mb-6">No organizations yet. Create one to get started!</p>
+          <p class="text-gray-500 mb-6">{t('noOrganizationsMsg')}</p>
         </div>
       ) : (
-        <div class="grid gap-4 md:grid-cols-2 mb-12">
+        <div class="grid gap-4 sm:grid-cols-2 mb-12 auto-rows-max">
           {organizations.value.map(org => (
             <div key={org.id} class="relative">
               <OrganizationCard 
@@ -40,7 +41,7 @@ export function OrganizationsView() {
               <button
                 onClick={() => deletingOrgId.value = org.id}
                 class="absolute top-2 right-2 p-2 text-red-600 hover:bg-red-50 rounded transition-colors"
-                title="Delete organization"
+                title={t('deleteOrgTitle')}
               >
                 🗑️
               </button>
@@ -53,9 +54,9 @@ export function OrganizationsView() {
       <div class="flex justify-center mt-12">
         <button 
           onClick={() => showAddModal.value = true}
-          class="px-8 py-3 bg-green-700 text-white font-bold rounded-lg hover:bg-green-800 transition-colors shadow-lg text-lg flex items-center gap-2"
+          class="px-6 sm:px-8 py-2 sm:py-3 bg-green-700 text-white font-bold rounded-lg hover:bg-green-800 transition-colors shadow-lg text-sm sm:text-lg flex items-center gap-2"
         >
-          ➕ Add Organization
+          ➕ {t('addOrganization')}
         </button>
       </div>
 
@@ -70,10 +71,10 @@ export function OrganizationsView() {
       {/* Delete Confirmation Modal */}
       {deletingOrgId.value && (
         <ConfirmationModal
-          title="Delete Organization"
-          message="Are you sure you want to delete this organization and all its modules? This action cannot be undone."
-          confirmText="Delete"
-          cancelText="Cancel"
+          title={t('deleteOrganization')}
+          message={t('deleteOrgConfirm')}
+          confirmText={t('delete')}
+          cancelText={t('cancel')}
           isDelete={true}
           onConfirm={handleDeleteOrganization}
           onCancel={() => deletingOrgId.value = null}

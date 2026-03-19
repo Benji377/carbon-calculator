@@ -1,6 +1,7 @@
 import { useState } from 'preact/hooks';
 import { MODULE_CATALOG } from '../data/moduleCatalog';
 import type { ModuleInstance } from '../types';
+import { t } from '../i18n';
 
 interface Props {
   onClose: () => void;
@@ -31,13 +32,13 @@ export function AddModuleModal({ onClose, onConfirm }: Props) {
 
   return (
     <div class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-      <div class="bg-white rounded-lg p-6 max-w-md w-full shadow-xl max-h-screen overflow-y-auto">
-        <h2 class="text-xl font-bold mb-2">Add a Module</h2>
-        <p class="text-gray-600 text-sm mb-6">Select a module type and enter values.</p>
+      <div class="bg-white rounded-lg p-4 sm:p-6 max-w-md w-full shadow-xl max-h-screen overflow-y-auto">
+        <h2 class="text-lg sm:text-xl font-bold mb-2">{t('addModule')}</h2>
+        <p class="text-gray-600 text-xs sm:text-sm mb-6">{t('selectModuleDesc')}</p>
 
         {/* Module Selection */}
         <div class="mb-4">
-          <label class="block text-sm font-bold mb-2">Module Type</label>
+          <label class="block text-xs sm:text-sm font-bold mb-2">{t('selectModuleType')}</label>
           <select 
             value={selectedDefId}
             onChange={(e) => {
@@ -45,7 +46,7 @@ export function AddModuleModal({ onClose, onConfirm }: Props) {
               setMainValue(0);
               setSubValues({});
             }}
-            class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-500"
+            class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-500 text-sm"
           >
             {Object.values(MODULE_CATALOG).map(mod => (
               <option key={mod.id} value={mod.id}>{mod.icon} {mod.title}</option>
@@ -57,13 +58,13 @@ export function AddModuleModal({ onClose, onConfirm }: Props) {
         {/* Main Value Input - only for modules without submodules */}
         {(!def?.submodules || def.submodules.length === 0) && (
           <div class="mb-6">
-            <label class="block text-sm font-bold mb-2">Value ({def?.unit})</label>
+            <label class="block text-xs sm:text-sm font-bold mb-2">{t('value')} ({def?.unit})</label>
             <input 
               type="number" min="0" step="0.1"
               value={mainValue}
               onInput={(e) => setMainValue(Number((e.target as HTMLInputElement).value))}
-              class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-500"
-              placeholder="Enter value"
+              class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-500 text-sm"
+              placeholder={t('enterValue')}
             />
           </div>
         )}
@@ -71,30 +72,30 @@ export function AddModuleModal({ onClose, onConfirm }: Props) {
         {/* Submodule Inputs */}
         {def?.submodules && def.submodules.length > 0 && (
           <div class="space-y-3 mb-6">
-            <p class="font-bold text-sm text-gray-700">Enter Values by Type ({def.unit}):</p>
+            <p class="font-bold text-xs sm:text-sm text-gray-700">{t('enterValuesByType')} ({def.unit}):</p>
             {def.submodules.map(sub => (
               <div key={sub.id} class="flex justify-between items-center gap-4">
-                <label class="text-sm text-gray-600 flex-1">{sub.title}</label>
+                <label class="text-xs sm:text-sm text-gray-600 flex-1">{sub.title}</label>
                 <input 
                   type="number" min="0" step="0.1"
                   value={subValues[sub.id] || 0}
                   onInput={(e) => handleSubChange(sub.id, Number((e.target as HTMLInputElement).value))}
-                  class="w-24 p-1.5 border border-gray-300 rounded text-right"
+                  class="w-20 sm:w-24 p-1.5 border border-gray-300 rounded text-right text-sm"
                 />
               </div>
             ))}
           </div>
         )}
 
-        <div class="flex justify-end gap-3 mt-8">
-          <button onClick={onClose} class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded font-medium">
-            Cancel
+        <div class="flex justify-end gap-2 sm:gap-3 mt-8">
+          <button onClick={onClose} class="px-3 sm:px-4 py-2 text-gray-600 hover:bg-gray-100 rounded font-medium text-sm">
+            {t('cancel')}
           </button>
           <button 
             onClick={handleAdd} 
-            class="px-4 py-2 bg-green-700 text-white font-bold rounded hover:bg-green-800"
+            class="px-3 sm:px-4 py-2 bg-green-700 text-white font-bold rounded hover:bg-green-800 text-sm"
           >
-            Add Module
+            {t('addModuleBtn')}
           </button>
         </div>
       </div>
