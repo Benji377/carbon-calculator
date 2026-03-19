@@ -1,39 +1,143 @@
-# Carbon calculator
+# ♻️ Carbon Calculator
 
-## Intro
+A modern, responsive web application that helps organizations track and calculate their carbon dioxide (CO₂) emissions. Built with [Preact](https://preactjs.com/), [TypeScript](https://www.typescriptlang.org/), and [Tailwind CSS](https://tailwindcss.com/).
 
-The purpose of this web app is to allow organizations to manually add their consumptions in a modular way and get a calculated CO2 emissions print back. The webapp should be kept simple, modular and easy to maintain while also looking good and modern using a minimalistic but colorful design.
+## 📋 About
 
-## Pages
+Carbon Calculator is an open-source Progressive Web App (PWA) designed to make carbon footprint tracking accessible and intuitive. Organizations can:
 
-At the top there is a navbar with icons. Left is the logo.png and to the right are links to the pages: Settings and Statistics.
-At the bottom there is a footer that has a link to the About page
+- **Track multiple organizations** with different countries and emission factors
+- **Add modular consumption data** for various categories (food, energy, transport, equipment, etc.)
+- **Calculate CO₂ emissions** based on country-specific emission factors
+- **Compare emissions** between organizations with visual charts and analytics
+- **Export and import data** for backup and sharing
+- **Work offline** thanks to PWA technology
+- **Use multiple languages** (English, German, Italian, Spanish, Swedish)
 
-### Main page
 
-The main page should simply show a list of organizations. If none are available, the user can add one with a + button. Each item in the organization list has a button on the right that allows to be deleted (with a confirmation modale). Each organization card view has a title, a description and the flag of the country as the icon. Clicking on an organization item in the list, opens the dashboard for that organization.
+## 🚀 Quick Start
 
-### Dashboard
+### Prerequisites
 
-The dashboard page contains a list of modules configured for that organization. There is a floating action button to add more modules. Upon clicking it, a new page pops up with a list of possible modules. The user selects one, adds the value and taps ok to confirm, then he gets rdirected back to the dashboard. Each module in the list on the dashboard has a title, a short description and the value entered with its entity (pieces, kg, km, ...). On the right of the module are two icons, one for editing the value and one for deleting the value (with a modale confirmation).
-At the top of the dashboard page is a big number showing the total CO2 emission from all modules together
+- [Node.js](https://nodejs.org/) 20.0 or higher
+- npm or yarn
 
-### Settings page
+### Installation
 
-Contains basic settings like changing the language
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/carbon-calculator.git
+cd carbon-calculator
+```
 
-### About page
+2. Install dependencies:
+```bash
+npm install
+```
 
-Contains the name of the project, a description, list of contributors and at the bottom it has the erasmus logo.
+### Development
 
-### Statistics page
+Start the development server:
 
-It displays stats about one or more organizations (can be selected). The user can compare two organizations, or simply check the data of a single organization with colorful displays and diagrams.
+```bash
+npm run dev
+```
 
-## Others
+The app will open at `http://localhost:5173/`
 
-- Emission factors can differ from country to country and are kept in json files
-- Language translations are also kept in JSON files
-- The app is a pwa and can therefore be installed on a phone and should be offline first
-- The website will be hosted on GitHub Pages
-- The website must be responsive and use tailwind CSS style
+### Build for Production
+
+```bash
+npm run build
+```
+
+This creates an optimized production build in the `dist/` directory.
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+
+## 📦 Project Structure
+
+```
+carbon-calculator/
+├── src/
+│   ├── components/          # Reusable UI components
+│   ├── pages/              # Page views (Dashboard, Settings, etc.)
+│   ├── data/
+│   │   ├── factors/        # Country-specific emission factors (JSON)
+│   │   ├── moduleCatalog.ts # Module definitions
+│   │   └── factors.ts      # Factor loading
+│   ├── locales/            # Translation files (i18n)
+│   ├── app.tsx             # Root component
+│   ├── store.ts            # State management (Preact Signals)
+│   ├── types.ts            # TypeScript type definitions
+│   └── main.tsx            # Entry point
+├── public/                 # Static assets
+├── package.json
+├── vite.config.ts
+└── tsconfig.json
+```
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Preact](https://preactjs.com/) - Fast 3kB React alternative
+- **State Management**: [@preact/signals](https://preactjs.com/guide/v10/signals/) - Fine-grained reactivity
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS
+- **Build Tool**: [Vite](https://vitejs.dev/) - Lightning fast build tool
+- **PWA**: [vite-plugin-pwa](https://vite-pwa-org.netlify.app/) - PWA support
+- **Charts**: [Recharts](https://recharts.org/) - React charting library
+- **Language**: [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript
+
+## 🌍 Supported Countries & Languages
+
+### Countries (Emission Factors)
+- 🇦🇹 Austria
+- 🇮🇹 Italy
+- 🇪🇸 Spain
+- 🇸🇪 Sweden
+
+### Languages
+- 🇬🇧 English
+- 🇩🇪 Deutsch
+- 🇮🇹 Italiano
+- 🇪🇸 Español
+- 🇸🇪 Svenska
+
+## 📱 PWA Features
+
+The app can be installed on any device as a Progressive Web App:
+
+- **Installable** on desktop, iOS, and Android
+- **Offline Support** - Works without internet connection
+- **App-like Experience** - Full-screen, native feel
+- **Fast Performance** - Pre-cached assets, instant load times
+
+## 📊 Emission Factors
+
+Emission factors are customizable per country and stored in JSON format. Currently supported:
+
+- Pizza/Food consumption
+- Coffee and beverages
+- Paper usage
+- Technology (computers, laptops, servers, printers)
+- Mobility/Transportation
+- Electricity by source
+- Water usage
+- Heating
+- And more...
+
+## 🤝 Contributing
+
+This project was developed as part of the Erasmus+ program. We welcome contributions!
+
+## 📄 License
+
+[MIT](/LICENSE)
+
+## 🙋 Support
+
+For issues, questions, or suggestions, please open an issue on GitHub.
