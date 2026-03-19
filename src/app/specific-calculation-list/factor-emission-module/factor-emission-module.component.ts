@@ -9,9 +9,10 @@ import { TranslationManagerService } from 'src/app/_services/translation-manager
  * The FactorEmissionModuleComponent is used to display the UI for the Factor Emission Module
  */
 @Component({
-  selector: 'app-factor-emission-module',
-  templateUrl: './factor-emission-module.component.html',
-  styleUrls: ['./factor-emission-module.component.scss']
+    selector: 'app-factor-emission-module',
+    templateUrl: './factor-emission-module.component.html',
+    styleUrls: ['./factor-emission-module.component.scss'],
+    standalone: false
 })
 
 export class FactorEmissionModuleComponent implements OnInit {

@@ -4,3 +4,16 @@
     margin: 25px auto;
     button{ margin-top: 10px; }
 }
+
+@media screen and (max-width: 500px) {
+    .container {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .container {
+        width: 95%;
+        margin: 15px auto;
+    }
+}

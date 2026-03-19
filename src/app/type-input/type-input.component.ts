@@ -12,9 +12,10 @@ import { TranslationManagerService } from '../_services/translation-manager.serv
  * This is an Angular component that displays one SubModule of the AdvancedEmissionModule.
 */
 @Component({
-  selector: 'app-type-input',
-  templateUrl: './type-input.component.html',
-  styleUrls: ['./type-input.component.scss']
+    selector: 'app-type-input',
+    templateUrl: './type-input.component.html',
+    styleUrls: ['./type-input.component.scss'],
+    standalone: false
 })
 export class TypeInputComponent implements OnInit {
   /**

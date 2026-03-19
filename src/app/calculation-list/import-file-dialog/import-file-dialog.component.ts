@@ -13,9 +13,10 @@ export interface ImportData{
  * This is a component class for an import file dialog in an Angular application
  */
 @Component({
-  selector: 'app-import-file-dialog',
-  templateUrl: './import-file-dialog.component.html',
-  styleUrls: ['./import-file-dialog.component.scss']
+    selector: 'app-import-file-dialog',
+    templateUrl: './import-file-dialog.component.html',
+    styleUrls: ['./import-file-dialog.component.scss'],
+    standalone: false
 })
 export class ImportFileDialogComponent {
 

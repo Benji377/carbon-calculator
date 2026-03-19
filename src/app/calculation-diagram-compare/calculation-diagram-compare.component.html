@@ -1,9 +1,4 @@
-<div	
-	gdColumns.gt-md="1fr 1fr"
-	gdColumns.lt-md="1fr"
-	gdGap="25px"
-	style="margin: 25px"
-	(resized)="onResize($event)">
+<div class="grid-layout" style="margin: 25px;">
 	<mat-card>
 		<app-bar-diagram-compare [data]="data" (click)="openDialog('bar-compare')" ></app-bar-diagram-compare>
 	</mat-card>
@@ -12,7 +7,7 @@
 		<app-bar-diagram-both [data]="data" (click)="openDialog('bar-both')"></app-bar-diagram-both>
 	</mat-card>
 
-	<mat-card gdColumn.gt-md="span 2">
+	<mat-card class="full-width">
 		<table mat-table [dataSource]="tableData">
 		  <ng-container matColumnDef="name">
 			<th mat-header-cell *matHeaderCellDef>Name</th>

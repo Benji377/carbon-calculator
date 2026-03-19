@@ -22,10 +22,14 @@
             transform: scale(1.007);
 
         }
+        @media screen and (max-width: 1024px) {
+            width: 85%;
+        }
         @media screen and (max-width: 800px) {
-
             width: 90%;
-
+        }
+        @media screen and (max-width: 600px) {
+            width: 95%;
         }
     }
 }

@@ -8,9 +8,10 @@ import { CalculationService } from '../_services/calculation.service';
  * is an Angular component responsible for handling the creation of new emission types in the advanced emission module.
  */
 @Component({
-  selector: 'app-create-type',
-  templateUrl: './create-type.component.html',
-  styleUrls: ['./create-type.component.scss']
+    selector: 'app-create-type',
+    templateUrl: './create-type.component.html',
+    styleUrls: ['./create-type.component.scss'],
+    standalone: false
 })
 export class CreateTypeComponent implements OnInit {
   /**

@@ -7,9 +7,10 @@ import type { DiagramData } from '../../shared';
  * form. It is especially useful to showcase which entry produces more or less CO2 compared to all others.
  */
 @Component({
-  selector: 'app-pie-diagram',
-  templateUrl: './pie-diagram.component.html',
-  styleUrls: ['./pie-diagram.component.scss']
+    selector: 'app-pie-diagram',
+    templateUrl: './pie-diagram.component.html',
+    styleUrls: ['./pie-diagram.component.scss'],
+    standalone: false
 })
 
 export class PieDiagramComponent implements OnInit {

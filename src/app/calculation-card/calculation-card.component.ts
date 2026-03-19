@@ -22,9 +22,10 @@ interface CalculationCardData{
  * To see one you need to do the following:
  */
 @Component({
-  selector: 'app-calculation-card',
-  templateUrl: './calculation-card.component.html',
-  styleUrls: ['./calculation-card.component.scss']
+    selector: 'app-calculation-card',
+    templateUrl: './calculation-card.component.html',
+    styleUrls: ['./calculation-card.component.scss'],
+    standalone: false
 })
 
 

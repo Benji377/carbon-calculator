@@ -1,10 +1,12 @@
-<div class="content" fxLayout="column" fxLayoutGap="15px" style="padding: 5px 30px;">
-    <app-calculation-card *ngFor="let module of modules" [module]="module" [factorManager]="factorManager"></app-calculation-card>
+<div class="content flex-column" style="padding: 5px 30px; gap: 15px;">
+  @for (module of modules; track module) {
+    <app-calculation-card [module]="module" [factorManager]="factorManager"></app-calculation-card>
+  }
 </div>
 <a
-    routerLink="{{this.currentUrl}}/create"
-    id="add_button"
-    mat-fab color="primary"
-    aria-label="Add new calculation button">
-    <mat-icon>add</mat-icon>
+  routerLink="{{this.currentUrl}}/create"
+  id="add_button"
+  mat-fab color="primary"
+  aria-label="Add new calculation button">
+  <mat-icon>add</mat-icon>
 </a>

@@ -20,9 +20,10 @@ interface CalculationData{
  * This is an Angular component that is used to create a new emission calculation.
  */
 @Component({
-  selector: 'app-create-calculation',
-  templateUrl: './create-calculation.component.html',
-  styleUrls: ['./create-calculation.component.scss']
+    selector: 'app-create-calculation',
+    templateUrl: './create-calculation.component.html',
+    styleUrls: ['./create-calculation.component.scss'],
+    standalone: false
 })
 export class CreateCalculationComponent implements OnInit {
   /**

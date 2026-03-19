@@ -7,9 +7,10 @@ import { NavigationService } from '../shared/navigation.service';
  * which includes a back button, a logo, and a menu.
  */
 @Component({
-  selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+    selector: 'app-navigation',
+    templateUrl: './navigation.component.html',
+    styleUrls: ['./navigation.component.scss'],
+    standalone: false
 })
 
 export class NavigationComponent implements OnInit{

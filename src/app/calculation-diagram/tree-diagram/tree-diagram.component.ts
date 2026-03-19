@@ -16,9 +16,10 @@ import type { DiagramData } from '../../shared';
  * The amount is then showcased graphically with trees and a big black number over it
  */
 @Component({
-  selector: 'app-tree-diagram',
-  templateUrl: './tree-diagram.component.html',
-  styleUrls: ['./tree-diagram.component.scss']
+    selector: 'app-tree-diagram',
+    templateUrl: './tree-diagram.component.html',
+    styleUrls: ['./tree-diagram.component.scss'],
+    standalone: false
 })
 
 export class TreeDiagramComponent implements OnInit {

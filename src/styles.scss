@@ -1,12 +1,9 @@
-// /**
-// * Generated theme by Material Theme Generator
-// * https://materialtheme.arcsine.dev
-// * Fork at: https://materialtheme.arcsine.dev/?c=YHBhbGV0dGU$YHByaW1hcnk$YF48IzU5OTgxYSIsIj9lcjwjY2RlMGJhIiwiO2VyPCMzZTdiMGZ$LCIlPmBePCM4MWI2MjIiLCI~ZXI8I2Q5ZTliZCIsIjtlcjwjNjQ5ZTE0fiwid2Fybj5gXjwjZWQ1ZDRjIiwiP2VyPCNmYWNlYzkiLCI7ZXI8I2U1NDEzM34sIj9UZXh0PCM0MTQ1M2UiLCI~PTwjZjNmNWRhIiwiO1RleHQ8I2ZmZmZmZiIsIjs9PCMyYzJjMmN$LCJmb250cz5bYEA8KC00fixgQDwoLTN$LGBAPCgtMn4sYEA8KC0xfixgQDxoZWFkbGluZX4sYEA8dGl0bGV$LGBAPHN1YiktMn4sYEA8c3ViKS0xfixgQDxib2R5LTJ$LGBAPGJvZHktMX4sYEA8YnV0dG9ufixgQDxjYXB0aW9ufixgQDxpbnB1dCIsInNpemU$bnVsbH1dLCJpY29uczxPdXRsaW5lZCIsIj9uZXNzPnRydWUsInZlcnNpb24$MTF9
-// */
+// Angular Material theming (Angular 21+)
+@use '@angular/material' as mat;
+@use 'sass:color';
+@use 'sass:map';
 
- @import '@angular/material/theming';
-
- @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100&display=swap');
 
 // // Include the common styles for Angular Material. We include this here so that you only
 // // have to load a single css file for Angular Material in your app.
@@ -96,12 +93,12 @@ $mat-dark-theme-foreground: (
 // // Background config
 // // Light bg
 $light-background:    #f3f5da;
-$light-bg-darker-5:   darken($light-background, 5%);
-$light-bg-darker-10:  darken($light-background, 10%);
-$light-bg-darker-20:  darken($light-background, 20%);
-$light-bg-darker-30:  darken($light-background, 30%);
-$light-bg-lighter-5:  lighten($light-background, 5%);
-$dark-bg-tooltip:     lighten(#2c2c2c, 20%);
+$light-bg-darker-5:   color.adjust($light-background, $lightness: -5%);
+$light-bg-darker-10:  color.adjust($light-background, $lightness: -10%);
+$light-bg-darker-20:  color.adjust($light-background, $lightness: -20%);
+$light-bg-darker-30:  color.adjust($light-background, $lightness: -30%);
+$light-bg-lighter-5:  color.adjust($light-background, $lightness: 5%);
+$dark-bg-tooltip:     color.adjust(#2c2c2c, $lightness: 20%);
 $dark-bg-alpha-4:     rgba(#2c2c2c, 0.04);
 $dark-bg-alpha-12:    rgba(#2c2c2c, 0.12);
 
@@ -125,10 +122,10 @@ $mat-light-theme-background: (
 
 // Dark bg
 $dark-background:     #2c2c2c;
-$dark-bg-lighter-5:   lighten($dark-background, 5%);
-$dark-bg-lighter-10:  lighten($dark-background, 10%);
-$dark-bg-lighter-20:  lighten($dark-background, 20%);
-$dark-bg-lighter-30:  lighten($dark-background, 30%);
+$dark-bg-lighter-5:   color.adjust($dark-background, $lightness: 5%);
+$dark-bg-lighter-10:  color.adjust($dark-background, $lightness: 10%);
+$dark-bg-lighter-20:  color.adjust($dark-background, $lightness: 20%);
+$dark-bg-lighter-30:  color.adjust($dark-background, $lightness: 30%);
 $light-bg-alpha-4:    rgba(#f3f5da, 0.04);
 $light-bg-alpha-12:   rgba(#f3f5da, 0.12);
 
@@ -151,11 +148,10 @@ $mat-dark-theme-background: (
   disabled-list-option:     $dark-bg-lighter-10,
 );
 
-// // Compute font config
- @include mat-core($fontConfig);
+// Full Angular Material theming via the new v21 theming API
+// See https://material.angular.io/guide/theming for details.
 
-// // Theme Config
-
+// Theme Config - CSS Custom Properties (for backward compatibility)
 body {
   --primary-color: #59981a;
   --primary-lighter-color: #cde0ba;
@@ -163,44 +159,14 @@ body {
   --text-primary-color: #{$light-primary-text};
   --text-primary-lighter-color: #{$dark-primary-text};
   --text-primary-darker-color: #{$light-primary-text};
-}
-$mat-primary: (
-  main: #59981a,
-  lighter: #cde0ba,
-  darker: #3e7b0f,
-  200: #59981a, // For slide toggle,
-  contrast : (
-    main: $light-primary-text,
-    lighter: $dark-primary-text,
-    darker: $light-primary-text,
-  )
-);
-$theme-primary: mat-palette($mat-primary, main, lighter, darker);
-
-
-body {
+  
   --accent-color: #81b622;
   --accent-lighter-color: #d9e9bd;
   --accent-darker-color: #649e14;
   --text-accent-color: #{$dark-primary-text};
   --text-accent-lighter-color: #{$dark-primary-text};
   --text-accent-darker-color: #{$light-primary-text};
-}
-$mat-accent: (
-  main: #81b622,
-  lighter: #d9e9bd,
-  darker: #649e14,
-  200: #81b622, // For slide toggle,
-  contrast : (
-    main: $dark-primary-text,
-    lighter: $dark-primary-text,
-    darker: $light-primary-text,
-  )
-);
-$theme-accent: mat-palette($mat-accent, main, lighter, darker);
-
-
-body {
+  
   --warn-color: #ed5d4c;
   --warn-lighter-color: #facec9;
   --warn-darker-color: #e54133;
@@ -208,28 +174,121 @@ body {
   --text-warn-lighter-color: #{$dark-primary-text};
   --text-warn-darker-color: #{$light-primary-text};
 }
-$mat-warn: (
-  main: #ed5d4c,
-  lighter: #facec9,
-  darker: #e54133,
-  200: #ed5d4c, // For slide toggle,
-  contrast : (
-    main: $dark-primary-text,
-    lighter: $dark-primary-text,
-    darker: $light-primary-text,
+
+// Material v21+ theme with brand colors
+$theme: mat.define-theme((
+  color: (
+    primary: mat.$green-palette,
+    tertiary: mat.$chartreuse-palette,
   )
-);
-$theme-warn: mat-palette($mat-warn, main, lighter, darker);
-;
+));
 
-$theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
-$altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
-
-// Theme Init
-@include angular-material-theme($theme);
+@include mat.all-component-bases($theme);
+@include mat.all-component-themes($theme);
 
 .theme-alternate {
-  @include angular-material-theme($altTheme);
+  $dark-color-config: (
+    primary: mat.$green-palette,
+    tertiary: mat.$chartreuse-palette,
+  );
+  
+  $dark-theme: mat.define-theme((
+    color: map.merge($dark-color-config, (theme-type: dark)),
+  ));
+
+  @include mat.all-component-bases($dark-theme);
+  @include mat.all-component-themes($dark-theme);
+}
+
+// Explicit toolbar styling for Material Design 3
+mat-toolbar[color="primary"] {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+mat-toolbar[color="accent"] {
+  background-color: var(--accent-color) !important;
+  color: white !important;
+}
+
+mat-toolbar[color="warn"] {
+  background-color: var(--warn-color) !important;
+  color: white !important;
+}
+
+// Global content padding for router outlet pages
+router-outlet {
+  + * {
+    padding: 0 20px;
+  }
+}
+
+// Content container padding styles
+.content {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+// Responsive container padding for smaller screens
+@media screen and (max-width: 600px) {
+  .content {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  
+  router-outlet {
+    + * {
+      padding: 0 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .content {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+  
+  router-outlet {
+    + * {
+      padding: 0 5px;
+    }
+  }
+}
+
+// Ensure mat-card has proper padding
+mat-card {
+  padding: 16px;
+}
+
+// Helpers (replaces @angular/flex-layout usage)
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-grow {
+  flex: 1 1 0%;
+}
+
+.align-space-between-center {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
 }
 
 // Specific component overrides, pieces that are not in line with the general theming
@@ -239,7 +298,32 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
   padding: 0 1.15em;
   margin: 0 .65em;
   min-width: 3em;
-  line-height: 36.4px
+  line-height: 36.4px;
+}
+
+// Primary button styling
+.mat-mdc-raised-button[color="primary"],
+.mat-mdc-flat-button[color="primary"] {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+// Accent button styling
+.mat-mdc-raised-button[color="accent"],
+.mat-mdc-flat-button[color="accent"] {
+  background-color: var(--accent-color) !important;
+  color: white !important;
+}
+
+// FAB (Floating Action Button) styling
+.mat-mdc-fab[color="primary"] {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.mat-mdc-fab[color="accent"] {
+  background-color: var(--accent-color) !important;
+  color: white !important;
 }
 
 .mat-standard-chip {
@@ -255,15 +339,12 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
   }
 }
 
-*{
-
-  margin: 0;
-  padding: 0;
-
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Roboto';
+  font-family: 'Roboto', "Helvetica Neue", sans-serif;
 }
 
 .error_card {
@@ -286,10 +367,7 @@ body {
 	color: var(--text-primary-lighter-color);
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; }
 
 @media (max-width: 600px) {
   body {

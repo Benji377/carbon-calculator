@@ -8,9 +8,10 @@ import type { DiagramData } from '../../shared';
  * It especially also shows the value on the y-axis and each bar has a specific place on the x-axis
  */
 @Component({
-  selector: 'app-bar-diagram',
-  templateUrl: './bar-diagram.component.html',
-  styleUrls: ['./bar-diagram.component.scss']
+    selector: 'app-bar-diagram',
+    templateUrl: './bar-diagram.component.html',
+    styleUrls: ['./bar-diagram.component.scss'],
+    standalone: false
 })
 
 export class BarDiagramComponent implements OnInit {

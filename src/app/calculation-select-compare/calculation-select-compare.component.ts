@@ -9,9 +9,10 @@ import { CalculationService } from '../_services/calculation.service';
  * This is an Angular component that allows the user to select a calculation to compare with another calculation.
  */
 @Component({
-  selector: 'app-calculation-select-compare',
-  templateUrl: './calculation-select-compare.component.html',
-  styleUrls: ['./calculation-select-compare.component.scss']
+    selector: 'app-calculation-select-compare',
+    templateUrl: './calculation-select-compare.component.html',
+    styleUrls: ['./calculation-select-compare.component.scss'],
+    standalone: false
 })
 export class CalculationSelectCompareComponent implements OnInit {
   /** The title of the calculation to be compared */

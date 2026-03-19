@@ -13,9 +13,10 @@ import { DiagramData, MenuService } from '../shared';
 * you will find the option "Diagrams" where you can look at this.
 */
 @Component({
-  selector: 'app-calculation-diagram',
-  templateUrl: './calculation-diagram.component.html',
-  styleUrls: ['./calculation-diagram.component.scss']
+    selector: 'app-calculation-diagram',
+    templateUrl: './calculation-diagram.component.html',
+    styleUrls: ['./calculation-diagram.component.scss'],
+    standalone: false
 })
 
 export class CalculationDiagramComponent implements OnInit {
@@ -95,12 +96,6 @@ export class CalculationDiagramComponent implements OnInit {
 		this.dialog.open(DiagramDialogComponent, { width: "95%", data: { type, data: this.data } });
 	}
 
-	/**
-   * @ignore
-	 */
-	openKonami() {
-		this.dialog.open(KonamiDialogComponent, { width: "95%" });
-	}
 }
 /**
  * This is a type alias for a string. It is used to define the type of the dialog that
@@ -127,15 +122,22 @@ interface DialogData{
  * It should just show a modal with diagram in a bigger size
  */
 @Component({
-	selector: 'app-diagram-dialog',
-	template: `
-	<div [ngSwitch]="data.type">
-		<div *ngSwitchCase="'bar'"> <app-bar-diagram [data]="data.data"></app-bar-diagram> </div>
-		<div *ngSwitchCase="'pie'"> <app-pie-diagram [data]="data.data"></app-pie-diagram> </div>
+    selector: 'app-diagram-dialog',
+    template: `
+	<div>
+	  @switch (data.type) {
+	    @case ('bar') {
+	      <div> <app-bar-diagram [data]="data.data"></app-bar-diagram> </div>
+	    }
+	    @case ('pie') {
+	      <div> <app-pie-diagram [data]="data.data"></app-pie-diagram> </div>
+	    }
+	  }
 	</div>
 	`,
-	styleUrls: []
-  })
+    styleUrls: [],
+    standalone: false
+})
 
 
 export class DiagramDialogComponent{
@@ -154,17 +156,4 @@ export class DiagramDialogComponent{
 	){}
 }
 
-/**
- * @ignore
- */
-@Component({
-	selector: 'app-konami-dialog',
-	template: `<img src="assets/oxygen-carbon.gif"/>`,
-	styles: ["img { width: 100%; height: auto; }"],
-	styleUrls: []
-  })
-
-export class KonamiDialogComponent{
-	constructor(){}
-}
 

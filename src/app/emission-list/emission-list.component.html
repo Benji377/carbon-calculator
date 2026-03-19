@@ -1,22 +1,28 @@
 <!-- This is the main window that opens when you first open the app-->
 
 <!-- This div mainly creates an empty gap between the navigation bar and the content-->
-<div class="content" fxLayout="column" fxLayoutGap="15px">
-    <p *ngIf="empty_hint_status == true">{{"description1" | translate}} <br> {{"description2" | translate}} <a href="assets/Handout.pdf" target="_blank">{{"description3" | translate}}</a></p>
-    <h2 *ngIf="empty_hint_status == true">{{ empty_hint_msg }}</h2>
-    <app-emission-item *ngFor="let calcs of calculations" [link]="['/emission', calcs.id]"
-    [name]="calcs.name" [factor_preset]="calcs.factor_preset"  [emission]="calcs.calculate()"
+<div class="content flex-column" style="gap: 15px; padding: 5px 30px;">
+  @if (empty_hint_status == true) {
+    <p>{{"description1" | translate}} <br> {{"description2" | translate}} <a href="assets/Handout.pdf" target="_blank">{{"description3" | translate}}</a></p>
+  }
+  @if (empty_hint_status == true) {
+    <h2>{{ empty_hint_msg }}</h2>
+  }
+  @for (calcs of calculations; track calcs) {
+    <app-emission-item [link]="['/emission', calcs.id]"
+      [name]="calcs.name" [factor_preset]="calcs.factor_preset"  [emission]="calcs.calculate()"
     (deleteItself)="deleteCalculation($event)"></app-emission-item>
-  </div>
+  }
+</div>
 
 
 <!-- This is the "+" Button in the bottom right corner of the app
-    The routerLink defines its action -->
+The routerLink defines its action -->
 <a
-    routerLink="/emission/create"
-    id="add_button"
-    mat-fab color="primary"
-    aria-label="Add new calculation button">
-    <mat-icon>add</mat-icon>
+  routerLink="/emission/create"
+  id="add_button"
+  mat-fab color="primary"
+  aria-label="Add new calculation button">
+  <mat-icon>add</mat-icon>
 </a>
 <app-footer></app-footer>

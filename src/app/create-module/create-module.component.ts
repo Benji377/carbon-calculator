@@ -12,9 +12,10 @@ import { CalculationService } from '../_services/calculation.service';
  *  It allows a user to create a new EmissionModule for a specific Calculation
  */
 @Component({
-  selector: 'app-create-module',
-  templateUrl: './create-module.component.html',
-  styleUrls: ['./create-module.component.scss']
+    selector: 'app-create-module',
+    templateUrl: './create-module.component.html',
+    styleUrls: ['./create-module.component.scss'],
+    standalone: false
 })
 export class CreateModuleComponent implements OnInit {
 

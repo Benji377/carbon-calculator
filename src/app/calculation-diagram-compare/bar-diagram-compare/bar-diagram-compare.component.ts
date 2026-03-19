@@ -5,9 +5,10 @@ import type { DiagramDataCompare } from '../../shared';
  * This angular component is used to create a bar chart for comparing data from two sources
  */
 @Component({
-  selector: 'app-bar-diagram-compare',
-  templateUrl: './bar-diagram-compare.component.html',
-  styleUrls: ['./bar-diagram-compare.component.scss']
+    selector: 'app-bar-diagram-compare',
+    templateUrl: './bar-diagram-compare.component.html',
+    styleUrls: ['./bar-diagram-compare.component.scss'],
+    standalone: false
 })
 export class BarDiagramCompareComponent {
   /**using @Input() decorator it takes in a property called data of type DiagramDataCompare */
