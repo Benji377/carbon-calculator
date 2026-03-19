@@ -33,7 +33,7 @@ export function OrganizationsView() {
       ) : (
         <div class="grid gap-4 sm:grid-cols-2 mb-12 auto-rows-max">
           {organizations.value.map(org => (
-            <div key={org.id} class="relative">
+            <div key={org.id} class="relative min-w-0 h-full">
               <OrganizationCard 
                 org={org} 
                 onClick={() => selectOrganization(org.id)}
