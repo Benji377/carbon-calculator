@@ -12,16 +12,18 @@ export function DashboardView() {
   const editingModule = useSignal<string | null>(null);
   const deletingModule = useSignal<string | null>(null);
 
-  const org = activeOrg.value;
-  if (!org) return <p class="text-gray-500 p-4">{t('noOrganizationsMsg')}</p>;
-
   // Calculate total CO2
   const totalCO2 = useComputed(() => {
+    const org = activeOrg.value;
+    if (!org) return 0;
     return org.modules.reduce((sum, mod) => {
       const def = MODULE_CATALOG[mod.defId];
       return sum + (def ? def.calculateCO2(mod.value, mod.submoduleValues, org.country) : 0);
     }, 0);
   });
+
+  const org = activeOrg.value;
+  if (!org) return <p class="text-gray-500 p-4">{t('noOrganizationsMsg')}</p>;
 
   const handleAddModule = (newModule: any) => {
     addModuleInstanceWithValues(newModule.defId, newModule.value, newModule.submoduleValues);
