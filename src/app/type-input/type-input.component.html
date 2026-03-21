@@ -1,7 +1,7 @@
 <div class="typeModule">
   <p class="hint">{{"hints."+module.id+"."+type.id|translate}}</p>
     <mat-card>
-      <mat-form-field>
+      <mat-form-field *ngIf="type">
         <input matInput type="number" min="0" (keyup)="save()" [(ngModel)]="type.number">
       </mat-form-field>
       <p>{{ module == undefined ? "" : module.unit | translate }}/{{"year"|translate}}</p>
