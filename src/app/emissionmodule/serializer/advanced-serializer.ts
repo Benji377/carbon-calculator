@@ -41,7 +41,7 @@ export class AdvancedSerializer implements Serializer {
         if(data.data){
             data.data.forEach((subModule:any) => {
                 if(subModule.length != 2) return;
-                list.push({ id: subModule[0], number: subModule[1] });
+                list.push({ id: subModule[0], number: Number(subModule[1]) });
             })
         }
 
