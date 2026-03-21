@@ -11,6 +11,7 @@
   "drinks_500ml": 0.8,
   "pizza": 1.5,
   "heating": 2.74,
+  "district_heating": 0.0675,
   "dina3": 0.0088,
   "dina4": 0.0044,
   "school_car": 0.31,

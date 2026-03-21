@@ -121,6 +121,14 @@ export const MODULE_CATALOG: Record<string, ModuleDef> = {
     icon: '🔥',
     calculateCO2: (value, _sub, country) => value * FACTORS[country].heating,
   },
+  district_heating: {
+    id: 'district_heating',
+    title: 'District Heating',
+    description: 'District heating energy consumption',
+    unit: 'kWh',
+    icon: '🌡️',
+    calculateCO2: (value, _sub, country) => value * FACTORS[country].district_heating,
+  },
   school_car: {
     id: 'school_car',
     title: 'School Car Travel',
