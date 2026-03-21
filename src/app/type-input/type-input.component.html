@@ -1,14 +1,14 @@
 <div class="typeModule">
   <p class="hint">{{"hints."+module.id+"."+type.id|translate}}</p>
     <mat-card>
+      <mat-form-field>
         <input matInput type="number" min="0" (keyup)="save()" [(ngModel)]="type.number">
-        <p>{{ module == undefined ? "" : module.unit | translate }}/{{"year"|translate}}</p>
-
+      </mat-form-field>
+      <p>{{ module == undefined ? "" : module.unit | translate }}/{{"year"|translate}}</p>
     </mat-card>
 
     <div class="result">
         <p>{{ type.number*factorManager.get(module.id + "_" + type.id) }} kg CO²</p>
-
     </div>
 </div>
 <app-footer></app-footer>
