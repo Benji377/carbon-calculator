@@ -1,8 +1,10 @@
 [![test]](https://github.com/tfobz/carbon-calculator/actions/workflows/build.yml)
 [![deploy]](https://github.com/tfobz/carbon-calculator/actions/workflows/deploy.yml)
+[![wiki]](https://github.com/tfobz/carbon-calculator/wiki)
 
 [test]: https://img.shields.io/github/actions/workflow/status/tfobz/carbon-calculator/build.yml?label=Test&logo=githubactions&style=for-the-badge&labelColor=555555
 [deploy]: https://img.shields.io/github/actions/workflow/status/tfobz/carbon-calculator/deploy.yml?label=Deploy&logo=githubactions&style=for-the-badge&labelColor=555555
+[wiki]: https://img.shields.io/badge/Wiki-Documentation-blueviolet?style=for-the-badge&logo=github&labelColor=555555
 
 # ♻️ Carbon Calculator
 
