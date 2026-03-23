@@ -15,7 +15,7 @@ on:
     # The branches below must be a subset of the branches above
     branches: [ "master" ]
   schedule:
-    - cron: '38 4 * * 0'
+    - cron: '15 11 * * 4'
 
 permissions:
   contents: read
@@ -30,13 +30,13 @@ jobs:
     name: njsscan code scanning
     steps:
     - name: Checkout the code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
     - name: nodejsscan scan
       id: njsscan
-      uses: ajinabraham/njsscan-action@7237412fdd36af517e2745077cedbf9d6900d711
+      uses: ajinabraham/njsscan-action@master
       with:
         args: '. --sarif --output results.sarif || true'
     - name: Upload njsscan report
-      uses: github/codeql-action/upload-sarif@v2
+      uses: github/codeql-action/upload-sarif@v4
       with:
         sarif_file: results.sarif
